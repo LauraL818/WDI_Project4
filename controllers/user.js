@@ -31,6 +31,8 @@ module.exports = {
       password: req.body.password
     })
 
+    newUser.password = newUser.generateHash(newUser.password)
+
     // save that new user
     newUser.save(function(err){
       if(err) throw err
@@ -52,12 +54,14 @@ module.exports = {
       if(!user){
         res.json({success:false, message:'User not found'})
       } else if (user) {
-        if (user.password != req.body.password){
+        //console.log(user.validPassword(req.body.password))
+        if (!user.validPassword(req.body.password)){
           res.json({success:false, message:'Wrong password'})
         } else {
-          var token = jwt.sign(user, app.get('superSecret'), {
+          var token = jwt.sign(user.toObject(), app.get('superSecret'), {
             expiresIn:6000
           })
+          
           res.json({
             success:true,
             message: 'Here is your token',

@@ -3,7 +3,8 @@ var
   app = express(),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
-  path = require('path')
+  path = require('path'),
+  userRoutes = require('./routes/users.js')
 
   var db = 'mongodb://localhost/moviesapp'
 
@@ -18,6 +19,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Static Files
 app.use(express.static(path.join(__dirname,'public')))
+
+// User Routes
+app.use('/', userRoutes)
 
 // Root Path -- if you go to any route besides /teams it'll send index.html File
 app.get('*', function(req,res){

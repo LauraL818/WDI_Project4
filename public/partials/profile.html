@@ -1,0 +1,13 @@
+<div class="navbar-fixed">
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a ui-sref="home"> Home </a></li>
+      <li><a ui-sref="movie"> Movies </a></li>
+      <li ng-show="user.isAuthed()"><a ui-sref="profile"> Profile</a></li>
+      <li ng-click="user.logout()"><a ui-sref="home"> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+</div>

@@ -2,7 +2,6 @@
   angular.module('allMovies')
     .controller('User', UserCtrl)
 
-
     function UserCtrl(user, auth){
       var vm = this;
 

@@ -3,6 +3,12 @@ var
   userRouter = express.Router(),
   userCtrl = require('../controllers/user.js')
 
-userRouter.get('/users', userCtrl.index)
+userRouter.route('/users')
+  .get(userCtrl.index)
+  .post(userCtrl.create)
+
+// userRouter.route('/users/:id')
+//   .get(userCtrl.show)
+
 
 module.exports = userRouter

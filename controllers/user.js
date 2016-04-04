@@ -6,5 +6,11 @@ module.exports = {
       if(err) throw err
       res.json(users)
     })
+  },
+  create: function(req,res){
+    User.create(req.body, function(err,user){
+      if(err) throw err
+      res.json(user)
+    })
   }
 }

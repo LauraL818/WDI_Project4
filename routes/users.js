@@ -9,6 +9,8 @@ userRouter.route('/users')
 
 userRouter.route('/users/:id')
   .get(userCtrl.show)
+  .delete(userCtrl.delete)
+  .patch(userCtrl.update)
 
 
 module.exports = userRouter

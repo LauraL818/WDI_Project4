@@ -12,5 +12,11 @@ module.exports = {
       if(err) throw err
       res.json(user)
     })
+  },
+  show: function(req,res){
+    User.findOne({_id:req.params.id}, function(err,user){
+      if(err) throw err
+      res.json(user)
+    })
   }
 }

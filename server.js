@@ -35,26 +35,26 @@ app.use('/auth', authRoutes)
 // route middleware to verify token
 app.use(function(req, res, next){
   // check header or url parameters or post parameters for a token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  var token = req.body.token || req.query.token || req.headers['x-access-token']
   if (!token){
     res.json({
       success: false,
-      message: 'you need a token to play at ChuckeCheese'});
+      message: 'You need a token to enter'})
   } else {
     jwt.verify(token, app.get('superSecret'), function(err, decoded) {
       if (err){
         return res.json({
           success: false,
-          message: 'That token is not legit'
+          message: 'Incorrect Token'
         });
       } else {
         // everything is good with the token, then save it to the req in other routes
         req.decoded = decoded;
-        next();
+        next()
       }
-    });
+    })
   }
-});
+})
 
 // User Routes
 app.use('/users', userRoutes)
@@ -63,7 +63,6 @@ app.use('/users', userRoutes)
 app.get('*', function(req,res){
   res.sendFile(__dirname + '/public/index.html')
 })
-
 
 var PORT = process.env.PORT || 3000
 app.listen(PORT, function(){

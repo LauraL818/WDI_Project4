@@ -1,0 +1,15 @@
+<h1>Home</h1>
+
+<input type="text" ng-model="user.email" placeholder="email"><br>
+<input type="password" ng-model="user.password" placeholder="password"><br>
+<br>
+
+<button ng-click="user.register()">Register</button>
+<button ng-click="user.login()">Login</button>
+<button ng-click="user.logout()" ng-show="user.isAuthed()">Logout</button>
+
+<button ng-click="user.getUsers()">get users list</button>
+<br><br>
+{{user.message}}
+
+<br><br><br>

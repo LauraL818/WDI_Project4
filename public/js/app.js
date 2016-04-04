@@ -7,45 +7,46 @@
       .config(function($httpProvider){
         $httpProvider.interceptors.push('authInterceptor');
       })
-      .controller('User', UserCtrl);
+      // .controller('User', UserCtrl);
 
-      function UserCtrl(user, auth){
-        var vm = this;
+      // function UserCtrl(user, auth){
+      //   var vm = this;
+      //
+      //   function handleRequest(res){
+      //     var token = res.data ? res.data.token : null;
+      //     console.log(res);
+      //     if (token){
+      //       console.log('JWT:', token);
+      //     };
+      //     vm.message = res.data.message;
+      //   }
+      //
+      //   vm.login = function() {
+      //     user.login(vm.email, vm.password)
+      //       .then(handleRequest, handleRequest);
+      //   }
+      //
+      //   vm.register = function() {
+      //     user.register(vm.email, vm.password)
+      //       .then(handleRequest, handleRequest);
+      //   }
+      //
+      //   vm.getUsers = function() {
+      //     user.getUsers()
+      //       .then(handleRequest, handleRequest);
+      //   }
+      //
+      //   vm.logout = function() {
+      //     auth.logout && auth.logout();
+      //     vm.message = 'You are logout now';
+      //   }
+      //
+      //   vm.isAuthed = function() {
+      //     return auth.isAuthed ? auth.isAuthed() : false;
+      //   }
+      // }
 
-        function handleRequest(res){
-          var token = res.data ? res.data.token : null;
-          console.log(res);
-          if (token){
-            console.log('JWT:', token);
-          };
-          vm.message = res.data.message;
-        }
-
-        vm.login = function() {
-          user.login(vm.email, vm.password)
-            .then(handleRequest, handleRequest);
-        }
-
-        vm.register = function() {
-          user.register(vm.email, vm.password)
-            .then(handleRequest, handleRequest);
-        }
-
-        vm.getUsers = function() {
-          user.getUsers()
-            .then(handleRequest, handleRequest);
-        }
-
-        vm.logout = function() {
-          auth.logout && auth.logout();
-          vm.message = 'You are logout now';
-        }
-
-        vm.isAuthed = function() {
-          return auth.isAuthed ? auth.isAuthed() : false;
-        }
-      }
-
+////////////////////////USER SERVICE///////////////////////
       function userService($http){
         var vm = this
 
@@ -56,12 +57,11 @@
           })
         }
 
-
       vm.register = function(email, password){
-        return $http.post('auth/register', {
-          email: email,
-          password: password
-        })
+          return $http.post('auth/register', {
+            email: email,
+            password: password
+          })
       }
 
       vm.getUsers = function(email, password){
@@ -69,6 +69,7 @@
         }
       }
 
+////////////////////////AUTH SERVICE///////////////////////
       function authService($window){
         var vm = this
 
@@ -100,6 +101,8 @@
         }
       }
 
+////////////////////////AUTH INTERCEPTOR///////////////////////
+
         function authInterceptor(auth){
           return {
             request: function(config){
@@ -116,6 +119,7 @@
           }
         }
 
+////////////////////////UI ROUTER STATES///////////////////////
     function mainRouter($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/')
 
@@ -128,9 +132,13 @@
         url:'/movie',
         templateUrl:'partials/movie.html'
       })
-
-
-
-
+      .state('login', {
+        url:'/login',
+        templateUrl:'partials/login.html'
+      })
+      .state('signup', {
+        url:'/signup',
+        templateUrl:'partials/signup.html'
+      })
     }
 })()

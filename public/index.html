@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>All The Movies</title>
     <!-- MATERIALIZE-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <!-- ANGULAR -->
     <script src="./js/angular.js"></script>
     <script src="./js/angular-ui-router.js"></script>
@@ -20,19 +21,6 @@
   </head>
   <body ng-app="allMovies" ng-controller="User as user">
     <div class="navbar-fixed">
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#!" class="brand-logo">Logo</a>
-          <ul class="right hide-on-med-and-down">
-            <li><a ui-sref="home"> Home </a></li>
-            <li><a ui-sref="movie"> Movie </a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-
-
-  
 
     <div ui-view></div>
   </body>

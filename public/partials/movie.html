@@ -35,5 +35,5 @@
  </div>
 
  <ul ng-show="movies.searches">
-   <li ng-repeat="result in movies.searchResults"><span ng-click="movies.searches = false">{{result.title}}</span></li>
+   <li ng-repeat="result in movies.searchResults"><span ng-click="movies.searches = false" ui-sref="dashboard({id: result.id})" >{{result.title}}</span></li>
  </ul>

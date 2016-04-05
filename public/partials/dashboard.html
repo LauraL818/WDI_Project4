@@ -14,11 +14,4 @@
   </nav>
 </div>
 
-<h1>Movie</h1>
-
-<div class="container" ng-init="movies.getMovies()">
-  <div class="row">
-    <div ng-repeat="r in movies.recent">{{r.title}} {{r.id}} <br><img  ui-sref="dashboard({id: r.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{r.poster_path}}" alt="" width="150px" height="200px" /></div>
-   </div>
-
- </div>
+<h1 ng-init="info.getDetails()">Dashboard</h1>

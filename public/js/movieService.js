@@ -6,12 +6,17 @@
 
     function movieService($http){
       var service = {
-        index: index
+        index: index,
+        show: show
       }
       return service
 
       function index(){
         return $http.post('/movies')
+      }
+
+      function show(id){
+        return $http.post('/movies/' + id)
       }
     }
 

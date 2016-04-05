@@ -33,11 +33,6 @@
         url:'/',
         templateUrl:'partials/home.html'
       })
-      .state('movie', {
-        url:'/movie',
-        templateUrl:'partials/movie.html',
-        controller:'MovieController as movies'
-      })
       .state('login', {
         url:'/login',
         templateUrl:'partials/login.html'
@@ -49,6 +44,16 @@
       .state('profile', {
         url:'/users/:id',
         templateUrl:'partials/profile.html'
+      })
+      .state('movie', {
+        url:'/movie',
+        templateUrl:'partials/movie.html',
+        controller:'MovieController as movies'
+      })
+      .state('dashboard', {
+        url:'/movie/:id',
+        templateUrl:'partials/dashboard.html',
+        controller:'InfoController as info'
       })
     }
 })()

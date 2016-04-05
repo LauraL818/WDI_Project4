@@ -8,4 +8,9 @@ module.exports = {
       res.json(response);
     });
   },
+  show: function(req,res){
+    MovieDB.movieInfo({id:req.params.id}, function(err, response){
+      res.json(response);
+    });
+  }
 }

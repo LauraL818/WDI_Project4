@@ -2,7 +2,6 @@
   angular.module('allMovies')
     .controller('MovieController', MovieController)
 
-
     MovieController.$inject = ['movieService']
 
     function MovieController(movieService){
@@ -14,6 +13,10 @@
         movieService.index().success(function(results){
           vm.recent = results.results
         })
+      }
+
+      vm.getOne = function(){
+        console.log('clicked')
       }
     }
 })()

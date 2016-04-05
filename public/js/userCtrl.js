@@ -12,6 +12,11 @@
           console.log('JWT:', token);
         };
         vm.message = res.data.message;
+        // vm.id = res.data.id
+        // user.show(vm.id).success(function(results){
+        //   vm.user = results
+        //   console.log(vm.user)
+        // })
       }
 
       vm.login = function() {
@@ -37,6 +42,7 @@
       vm.isAuthed = function() {
         return auth.isAuthed ? auth.isAuthed() : false;
       }
+
     }
 
 })()

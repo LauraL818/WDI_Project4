@@ -2,8 +2,8 @@
   angular.module('allMovies', ['ui.router'])
       .config(['$stateProvider', '$urlRouterProvider', mainRouter])
       .factory('authInterceptor', authInterceptor)
-      .service('user', userService)
-      .service('auth', authService)
+      // .service('user', userService)
+      // .service('auth', authService)
       .config(function($httpProvider){
         $httpProvider.interceptors.push('authInterceptor');
       })
@@ -47,59 +47,59 @@
       // }
 
 ////////////////////////USER SERVICE///////////////////////
-      function userService($http){
-        var vm = this
-
-        vm.login = function(email, password){
-          return $http.post('auth/authenticate', {
-            email: email,
-            password: password
-          })
-        }
-
-      vm.register = function(email, password){
-          return $http.post('auth/register', {
-            email: email,
-            password: password
-          })
-      }
-
-      vm.getUsers = function(email, password){
-        return $http.get('/users');
-        }
-      }
+      // function userService($http){
+      //   var vm = this
+      //
+      //   vm.login = function(email, password){
+      //     return $http.post('auth/authenticate', {
+      //       email: email,
+      //       password: password
+      //     })
+      //   }
+      //
+      // vm.register = function(email, password){
+      //     return $http.post('auth/register', {
+      //       email: email,
+      //       password: password
+      //     })
+      // }
+      //
+      // vm.getUsers = function(email, password){
+      //   return $http.get('/users');
+      //   }
+      // }
 
 ////////////////////////AUTH SERVICE///////////////////////
-      function authService($window){
-        var vm = this
-
-        vm.parseJwt = function(token) {
-         var base64Url = token.split('.')[1];
-         var base64 = base64Url.replace('-', '+').replace('_', '/');
-         return JSON.parse($window.atob(base64));
-       }
-
-        vm.saveToken = function(token){
-          $window.localStorage['jwtToken'] = token
-      }
-
-        vm.getToken = function() {
-            return $window.localStorage['jwtToken']
-          }
-
-        vm.isAuthed = function() {
-          var token = vm.getToken()
-          if(token) {
-            var params = vm.parseJwt(token)
-            return Math.round(new Date().getTime() / 1000) <= params.exp
-          } else {
-            return false
-          }
-        }
-        vm.logout = function() {
-          $window.localStorage.removeItem('jwtToken')
-        }
-      }
+      // function authService($window){
+      //   var vm = this
+      //
+      //   vm.parseJwt = function(token) {
+      //    var base64Url = token.split('.')[1];
+      //    var base64 = base64Url.replace('-', '+').replace('_', '/');
+      //    return JSON.parse($window.atob(base64));
+      //  }
+      //
+      //   vm.saveToken = function(token){
+      //     $window.localStorage['jwtToken'] = token
+      // }
+      //
+      //   vm.getToken = function() {
+      //       return $window.localStorage['jwtToken']
+      //     }
+      //
+      //   vm.isAuthed = function() {
+      //     var token = vm.getToken()
+      //     if(token) {
+      //       var params = vm.parseJwt(token)
+      //       return Math.round(new Date().getTime() / 1000) <= params.exp
+      //     } else {
+      //       return false
+      //     }
+      //   }
+      //   vm.logout = function() {
+      //     $window.localStorage.removeItem('jwtToken')
+      //   }
+      // }
 
 ////////////////////////AUTH INTERCEPTOR///////////////////////
 
@@ -143,7 +143,8 @@
       })
       .state('profile', {
         url:'/profile',
-        templateUrl:'partials/profile.html'
+        templateUrl:'partials/profile.html',
+        controller:'DetailController as details'
       })
     }
 })()

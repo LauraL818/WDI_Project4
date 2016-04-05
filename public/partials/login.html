@@ -16,8 +16,9 @@
 <input type="password" ng-model="user.password" placeholder="password"><br>
 <br>
 
-<button ng-click="user.login()" ui-sref="profile">Login</button>
+<button ng-click="user.login()"  ng-model="user.id" ui-sref="profile">Login</button>
 <button ng-click="user.logout()" ng-show="user.isAuthed()">Logout</button>
 
 <br><br>
 {{user.message}}
+{{user.id}}

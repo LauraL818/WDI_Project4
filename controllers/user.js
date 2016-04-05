@@ -23,7 +23,6 @@ module.exports = {
 
   //create user and assign token
   create: function(req,res){
-    console.log(req.body);
   // create a new user
     var newUser = new User({
       name: req.body.name,
@@ -48,7 +47,6 @@ module.exports = {
 
   // authenticate user using jwt
   authenticate: function(req,res){
-    console.log(req.body)
     User.findOne({email:req.body.email}, function(err,user){
       if(err) throw err
       if(!user){
@@ -61,10 +59,11 @@ module.exports = {
           var token = jwt.sign(user.toObject(), app.get('superSecret'), {
             expiresIn:6000
           })
-          
+
           res.json({
             success:true,
             message: 'Here is your token',
+            id: user._id,
             token: token
           })
         }

@@ -7,6 +7,7 @@
     function MovieController(movieService){
       var vm = this
       vm.title = "Movie Controller"
+      vm.searches = false
       console.log('Movie Controller is being used')
 
       vm.getMovies = function(){

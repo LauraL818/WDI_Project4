@@ -9,6 +9,7 @@
 
       vm.getDetails = function(){
         movieService.show($stateParams.id).success(function(results){
+          vm.movie = results
           console.log(results)
         })
       }

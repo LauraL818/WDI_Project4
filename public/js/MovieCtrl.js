@@ -17,8 +17,8 @@
 
       vm.findMovie = function(){
         console.log(vm.searchField)
-        movieService.post(vm.searchField).success(function(results){
-          console.log(results)
+        movieService.find(vm.searchField).success(function(results){
+          vm.searchResults = results.results
         })
       }
 

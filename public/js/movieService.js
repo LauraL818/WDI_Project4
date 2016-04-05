@@ -8,7 +8,7 @@
       var service = {
         index: index,
         show: show,
-        update: update
+        find: find
       }
       return service
 
@@ -20,8 +20,8 @@
         return $http.post('/movies/' + id)
       }
 
-      function update(){
-        return $http.get('/movies/search')
+      function find(movie){
+        return $http.post('/movies/search/movie', {query:movie})
       }
     }
 

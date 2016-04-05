@@ -58,7 +58,7 @@
       .state('search', {
         url:'/movies/search',
         templateUrl:'partials/search.html',
-        controller:'InfoController as info'
+        controller:'MovieController as movies'
       })
     }
 })()

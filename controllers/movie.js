@@ -14,12 +14,9 @@ module.exports = {
     })
   },
   search: function(req,res){
-    MovieDB.searchMovie({query: 'Zoolander' }, function(err, response){
-    var movieId = response.results[0].id
-    MovieDB.movieInfo({id: movieId}, function(err, response){
-      console.log(response);
+    console.log(req.body)
+    MovieDB.searchMovie(req.body, function(err, response){
       res.json(response)
-    })
   })
  }
 }

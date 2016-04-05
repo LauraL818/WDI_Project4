@@ -5,5 +5,6 @@ var
 
 movieRouter.post('/', movieCtrl.index)
 movieRouter.post('/:id', movieCtrl.show)
+movieRouter.post('/search/movie', movieCtrl.search)
 
 module.exports = movieRouter

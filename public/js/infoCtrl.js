@@ -11,6 +11,7 @@
 
       vm.getDetails = function(){
         movieService.show($stateParams.id).success(function(results){
+          console.log(results)
           vm.main = false
           vm.details = false
           vm.overview = false

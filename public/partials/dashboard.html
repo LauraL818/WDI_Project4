@@ -14,14 +14,19 @@
   </nav>
 </div>
 
-<h1 ng-init="info.getDetails()">Dashboard</h1>
-<h3>{{info.movie.title}}</h3>
+<!-- Basic Movie Facts-->
+<h3 ng-init="info.getDetails()">{{info.movie.title}}</h3>
 <img ng-src="http://image.tmdb.org/t/p/w500{{info.movie.poster_path}}" alt="" height="250px" width="200px"/>
 <h5>{{info.release}}</h5>
+<!--End Basic Movie Facts-->
+
+<!--Buttons to toggle between graphs and overview-->
 <button ng-click="info.overview = true; info.main = true" ng-hide="info.overview">Overview</button>
 <button ng-click="info.main = false; info.overview = false" ng-show="info.main">Dashboard</button>
 
+<!-- Movie Overview -->
 <div ng-show="info.overview">{{info.movie.overview}}</div>
+
 <!-- Fill Gauge Graphs -->
 <div class="row" ng-hide="info.overview">
   <div class="col s12 m4 center-align">

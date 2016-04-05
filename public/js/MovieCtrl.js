@@ -15,8 +15,12 @@
         })
       }
 
-      vm.getOne = function(){
-        console.log('clicked')
+      vm.findMovie = function(){
+        console.log(vm.searchField)
+        movieService.post(vm.searchField).success(function(results){
+          console.log(results)
+        })
       }
+
     }
 })()

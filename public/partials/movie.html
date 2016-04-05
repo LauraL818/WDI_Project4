@@ -16,9 +16,27 @@
 
 <h1>Movie</h1>
 
+<form ng-submit="movies.findMovie()">
+ <div class="input-field">
+   <input ng-model="movies.searchField" id="search" type="search" required>
+   <label for="search"><i class="material-icons">search</i></label>
+   <i class="material-icons">close</i>
+   <button type="submit">Search</button>
+ </div>
+</form>
+
+<!-- <form ng-if="user.editing" ng-submit="user.update()">
+	<input ng-model="user.editingUser.email" type="text" placeholder="Email">
+	<button type="submit">Update User!</button>
+	<button ng-click="detail.editing=false">Cancel</button>
+</form> -->
+
 <div class="container" ng-init="movies.getMovies()">
   <div class="row">
-    <div ng-repeat="r in movies.recent">{{r.title}} {{r.id}} <br><img  ui-sref="dashboard({id: r.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{r.poster_path}}" alt="" width="150px" height="200px" /></div>
+    <div ng-repeat="r in movies.recent">{{r.title}}
+      <br>
+      <img  ui-sref="dashboard({id: r.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{r.poster_path}}" alt="" width="150px" height="200px" />
+    </div>
    </div>
 
  </div>

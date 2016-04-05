@@ -7,7 +7,8 @@
     function movieService($http){
       var service = {
         index: index,
-        show: show
+        show: show,
+        update: update
       }
       return service
 
@@ -17,6 +18,10 @@
 
       function show(id){
         return $http.post('/movies/' + id)
+      }
+
+      function update(){
+        return $http.get('/movies/search')
       }
     }
 

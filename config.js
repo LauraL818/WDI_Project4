@@ -1,4 +1,4 @@
 module.exports = {
-  'secret': 'boom',
+  'secret': process.env.SECRET,
   'database': 'mongodb://localhost/moviesapp'
 }

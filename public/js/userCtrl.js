@@ -14,17 +14,10 @@
           console.log('JWT:', token);
         };
 
+        // Set user and user id based on user that is sent back
         vm.message = res.data.message;
         vm.user = res.data.user
         vm.id = res.data.user._id
-        // If user found hit show route
-        // if(res.data.id){
-        //   vm.id = res.data.id
-        //   user.show(vm.id).success(function(results){
-        //     console.log(results)
-        //   })
-        // }
-
       }
 
       vm.login = function() {
@@ -53,6 +46,7 @@
 
       vm.edit = function(){
         console.log(vm.user)
+        // set new user email variable
           vm.editing = true
           vm.editingUser = {
             email: vm.email
@@ -66,7 +60,6 @@
           vm.email = results.email
         })
       }
-
     }
 
 })()

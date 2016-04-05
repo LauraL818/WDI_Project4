@@ -15,4 +15,6 @@
 </div>
 
 <h1 ng-init="info.getDetails()">Dashboard</h1>
-<h5>{{info.movie.title}}</h5>
+<h3>{{info.movie.title}}</h3>
+<img ng-src="http://image.tmdb.org/t/p/w500{{info.movie.poster_path}}" alt="" height="250px" width="200px"/>
+<h5>{{info.release}}</h5>

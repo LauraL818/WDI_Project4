@@ -10,7 +10,9 @@
       vm.getDetails = function(){
         movieService.show($stateParams.id).success(function(results){
           vm.movie = results
-          console.log(results)
+          vm.uneditedDate = results.release_date
+          vm.release = moment(vm.uneditedDate).format('MMMM DD, YYYY')
+          console.log(vm.release)
         })
       }
 

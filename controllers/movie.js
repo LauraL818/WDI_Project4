@@ -4,7 +4,7 @@ var
 
 module.exports = {
   index: function(req,res){
-    MovieDB.movieInfo({id: 217}, function(err, response){
+    MovieDB.miscNowPlayingMovies(function(err, response){
       res.json(response);
     });
   },

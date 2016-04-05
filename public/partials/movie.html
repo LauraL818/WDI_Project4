@@ -15,3 +15,10 @@
 </div>
 
 <h1>Movie</h1>
+
+<div class="container" ng-init="movies.getMovies()">
+  <div class="row">
+    <div ng-repeat="r in movies.recent">{{r.title}} <br> <img ng-src="http://image.tmdb.org/t/p/w500{{r.poster_path}}" alt="" width="150px" height="200px" /></div>
+   </div>
+
+ </div>

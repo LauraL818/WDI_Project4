@@ -2,7 +2,9 @@
   angular.module('allMovies')
     .controller('User', UserCtrl)
 
-    function UserCtrl(user, auth){
+    UserCtrl.$inject = ['user', 'auth', '$stateParams']
+
+    function UserCtrl(user, auth, $stateParams){
       var vm = this;
 
       function handleRequest(res){
@@ -12,11 +14,20 @@
           console.log('JWT:', token);
         };
         vm.message = res.data.message;
-        // vm.id = res.data.id
-        // user.show(vm.id).success(function(results){
-        //   vm.user = results
-        //   console.log(vm.user)
-        // })
+
+
+
+        // If user found hit show route
+        if(res.data.id){
+          vm.id = res.data.id
+          user.show(vm.id).success(function(results){
+            console.log(results)
+          })
+        }
+
+
+
+
       }
 
       vm.login = function() {
@@ -41,6 +52,22 @@
 
       vm.isAuthed = function() {
         return auth.isAuthed ? auth.isAuthed() : false;
+      }
+
+      vm.edit = function(){
+          vm.editing = true
+          vm.editingUser = {
+            email: user.email
+          }
+        }
+
+      vm.update = function(){
+        console.log($stateParams)
+        user.update($stateParams.id).success(function(results){
+          vm.editing = false
+          vm.user = results.user
+          console.log(results)
+        })
       }
 
     }

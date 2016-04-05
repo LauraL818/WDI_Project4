@@ -142,9 +142,8 @@
         templateUrl:'partials/signup.html'
       })
       .state('profile', {
-        url:'/profile',
-        templateUrl:'partials/profile.html',
-        controller:'DetailController as details'
+        url:'/users/:id',
+        templateUrl:'partials/profile.html'
       })
     }
 })()

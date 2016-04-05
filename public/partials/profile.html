@@ -11,18 +11,19 @@
   </div>
 </nav>
 </div>
+<div ng-if="!user.editing">
+  <h5>{{user.email}}</h5>
+  <button ng-click="user.edit()">Edit</button>
+</div>
 
-{{details.title}}
-{{user.user.email}}
 
-<!-- <h5 ng-model="user.name" ng-hide="user.editable"> Name: {{user.name}} </h5>
-<input ng-model="user.name"  ng-show="user.editable" value="{{user.name}}">
+<form ng-if="user.editing" ng-submit="user.update()">
+	<input ng-model="user.editingUser.email" type="text" placeholder="Email">
+	<button type="submit">Update User!</button>
+	<button ng-click="detail.editing=false">Cancel</button>
+</form>
 
-<h5 ng-model="user.email" ng-hide="user.editable"> Email: {{user.email}} </h5>
-<input ng-model="user.email"  ng-show="user.editable" value="{{user.email}}">
-
-<h5 ng-model="user.password" ng-hide="user.editable"> Password: {{user.password}} </h5>
-<input ng-model="user.password"  ng-show="user.editable" value="{{user.password}}">
-
-<button ng-show="user.editable" ng-click="user.editable = false; user.updateUser(user.user)">Save</button>
-<button ng-hide="user.editable"  ng-click="user.editable = true">Edit</button> -->
+<!-- <input ng-model="user.email" ng-hide="user.editable" value="{{user.user.email}}">
+{{user.user._id}}
+<button ng-click="user.editable = false" ng-show="user.editable">Edit</button>
+<button ng-click="user.editable = true" ng-hide="user.editable; user.updateUser(user.user)">Save</button> -->

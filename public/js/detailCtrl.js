@@ -7,11 +7,11 @@
     function DetailController(user,$stateParams){
       var vm = this
       vm.title = 'Detail Controller'
-      // vm.editable = false
 
-      // userService.show($stateParams.id).success(function(results){
-      //   console.log(results)
-      // })
+      vm.editable = true
+
+      // vm.email = user.email
+      // console.log(vm.email)
 
     }
 

@@ -18,3 +18,9 @@
 <h3>{{info.movie.title}}</h3>
 <img ng-src="http://image.tmdb.org/t/p/w500{{info.movie.poster_path}}" alt="" height="250px" width="200px"/>
 <h5>{{info.release}}</h5>
+<button ng-click="info.details = true; info.main = true" ng-hide="info.overview">Details</button>
+<button ng-click="info.overview = true; info.main = true" ng-hide="info.details">Overview</button>
+<button ng-click="info.main = false; info.details = false; info.overview = false" ng-show="info.main">Dashboard</button>
+
+<div ng-show="info.overview">Overview</div>
+<div ng-show="info.details">Details</div>

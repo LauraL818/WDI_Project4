@@ -30,11 +30,6 @@
           .then(handleRequest, handleRequest);
       }
 
-      vm.getUsers = function() {
-        user.getUsers()
-          .then(handleRequest, handleRequest);
-      }
-
       vm.logout = function() {
         auth.logout && auth.logout();
         vm.message = 'You are logout now';
@@ -45,7 +40,6 @@
       }
 
       vm.edit = function(){
-        console.log(vm.user)
         // set new user email variable
           vm.editing = true
           vm.editingUser = {

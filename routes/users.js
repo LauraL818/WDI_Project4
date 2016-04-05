@@ -7,7 +7,7 @@ userRouter.route('/')
   .get(userCtrl.index)
 
 userRouter.route('/:id')
-  .get(userCtrl.show)
+  // .get(userCtrl.show)
   .delete(userCtrl.delete)
   .patch(userCtrl.update)
 

@@ -61,9 +61,9 @@ module.exports = {
           })
 
           res.json({
+            user: user,
             success:true,
             message: 'Here is your token',
-            id: user._id,
             token: token
           })
         }
@@ -71,12 +71,13 @@ module.exports = {
     })
   },
 
-  show: function(req,res){
-    User.findOne({_id:req.params.id}, function(err,user){
-      if(err) throw err
-      res.json(user)
-    })
-  },
+  // show: function(req,res){
+  //   User.findOne({_id:req.params.id}, function(err,user){
+  //     if(err) throw err
+  //     res.json(user)
+  //   })
+  // },
+
   delete: function(req,res){
     User.findOneAndRemove({_id:req.params.id}, function(err){
       if(err) throw err

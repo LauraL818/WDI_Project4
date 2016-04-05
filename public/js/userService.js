@@ -25,11 +25,11 @@
     return $http.get('/users');
     }
 
-    vm.show = function(id){
-      return $http.get('/users/' + id)
-    }
+    // vm.show = function(id){
+    //   return $http.get('/users/' + id)
+    // }
 
-    vm.update = function(id,data){
+    vm.update = function(id, data){
       return $http.patch('/users/' + id, data)
     }
 

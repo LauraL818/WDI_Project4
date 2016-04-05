@@ -10,6 +10,7 @@ var
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
   path = require('path'),
+  logger = require('morgan'),
   userRoutes = require('./routes/users.js'),
   movieRoutes = require('./routes/movies.js'),
   authRoutes = require('./routes/auth.js'),
@@ -29,6 +30,7 @@ app.set('superSecret', config.secret); // secret variable
 // Middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(logger('dev'))
 // Static Files
 app.use(express.static(path.join(__dirname,'public')))
 

@@ -15,6 +15,7 @@
     "express": "^4.13.4",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.11",
+    "morgan": "^1.7.0",
     "moviedb": "^0.2.3",
     "path": "^0.12.7"
   }

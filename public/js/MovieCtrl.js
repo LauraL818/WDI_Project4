@@ -13,7 +13,6 @@
       vm.getMovies = function(){
         movieService.index().success(function(results){
           vm.recent = results.results
-          console.log(results)
         })
       }
     }

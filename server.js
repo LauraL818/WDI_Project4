@@ -1,3 +1,9 @@
+  try {
+    require('dotenv').config()
+  } catch(ex){
+    handleErr(ex)
+  }
+
 var
   express = require('express'),
   app = express(),

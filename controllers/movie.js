@@ -1,10 +1,11 @@
-var Movie = require('../models/Movie.js')
+var
+  Movie = require('../models/Movie.js'),
+  MovieDB = require('moviedb')(process.env.MOVIE_KEY)
 
 module.exports = {
   index: function(req,res){
-    Movie.find({}, function(err,movies){
-      if(err) throw err
-      res.json(movies)
-    })
-  }
+    MovieDB.movieInfo({id: 217}, function(err, response){
+      res.json(response);
+    });
+  },
 }

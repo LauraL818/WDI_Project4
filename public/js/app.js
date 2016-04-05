@@ -130,7 +130,8 @@
       })
       .state('movie', {
         url:'/movie',
-        templateUrl:'partials/movie.html'
+        templateUrl:'partials/movie.html',
+        controller:'MovieController as movies'
       })
       .state('login', {
         url:'/login',

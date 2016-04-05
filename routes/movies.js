@@ -3,6 +3,6 @@ var
   movieRouter = express.Router(),
   movieCtrl = require('../controllers/movie.js')
 
-movieRouter.get('/movies', movieCtrl.index)
+movieRouter.post('/', movieCtrl.index)
 
 module.exports = movieRouter

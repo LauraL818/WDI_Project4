@@ -18,9 +18,26 @@
 <h3>{{info.movie.title}}</h3>
 <img ng-src="http://image.tmdb.org/t/p/w500{{info.movie.poster_path}}" alt="" height="250px" width="200px"/>
 <h5>{{info.release}}</h5>
-<button ng-click="info.details = true; info.main = true" ng-hide="info.overview">Details</button>
-<button ng-click="info.overview = true; info.main = true" ng-hide="info.details">Overview</button>
-<button ng-click="info.main = false; info.details = false; info.overview = false" ng-show="info.main">Dashboard</button>
+<button ng-click="info.overview = true; info.main = true" ng-hide="info.overview">Overview</button>
+<button ng-click="info.main = false; info.overview = false" ng-show="info.main">Dashboard</button>
 
-<div ng-show="info.overview">Overview</div>
-<div ng-show="info.details">Details</div>
+<div ng-show="info.overview">{{info.movie.overview}}</div>
+<!-- Fill Gauge Graphs -->
+<div class="row" ng-hide="info.overview">
+  <div class="col s12 m4 center-align">
+        <h5>Revenue</h5>
+        <p>(in millions)</p>
+          <d3-chart id="fill1" revenue="{{info.revenue}}"></d3-chart>
+  </div>
+  <div class="col s12 m4 center-align">
+        <h5>Rating</h5>
+        <p>(voter average)</p>
+          <d3-chart id="fill2" rating="{{info.rating}}"></d3-chart>
+  </div>
+  <div class="col s12 m4 center-align">
+        <h5>Budget</h5>
+        <p>(in millions)</p>
+          <d3-chart id="fill3" budget="{{info.budget}}"></d3-chart>
+  </div>
+</div>
+<!-- End Fill Gauge Graphs -->

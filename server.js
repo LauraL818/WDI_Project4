@@ -19,14 +19,14 @@ var
   User = require('./models/User.js')
   // dotenv = require('dotenv').load({silent:true})
 
-  var db = config.database
+var db = config.database
 
-  mongoose.connect(db, function(err){
+mongoose.connect(db, function(err){
   if (err) return console.log(err)
   console.log('Connected to database ' + db)
 })
 
-  app.set('superSecret', config.secret); // secret variable
+app.set('superSecret', config.secret);
 
 // Middleware
 app.use(bodyParser.json())
@@ -43,7 +43,6 @@ app.use('/auth', authRoutes)
 
 // route middleware to verify token
 app.use(function(req, res, next){
-  // check header or url parameters or post parameters for a token
   var token = req.body.token || req.query.token || req.headers['x-access-token']
   if (!token){
     res.json({
@@ -57,7 +56,6 @@ app.use(function(req, res, next){
           message: 'Incorrect Token'
         });
       } else {
-        // everything is good with the token, then save it to the req in other routes
         req.decoded = decoded;
         next()
       }
@@ -68,7 +66,7 @@ app.use(function(req, res, next){
 // User Routes
 app.use('/users', userRoutes)
 
-// Root Path -- if you go to any route besides / it'll send index.html File
+// Root Path
 app.get('*', function(req,res){
   res.sendFile(__dirname + '/public/index.html')
 })

@@ -37,10 +37,15 @@
     </div>
    </div>
  </div>
+
+ <button ng-click="user.analyze = true" ng-show="!user.analyze"> Compare Movies </button>
+ <button ng-click="user.analyze = false" ng-show="user.analyze"> Done </button>
  <!-- MOVIE INFO -->
 
  <!-- D3 CHART -->
  <!-- <profile-chart id="profile" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} ng-if="user.budgets"></profile-chart> -->
 
- <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} ng-if="user.budgets"></profile-chart>
+ <div ng-show="user.analyze">
+   <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} ng-if="user.budgets"></profile-chart>
+ </div>
   <!-- D3 CHART -->

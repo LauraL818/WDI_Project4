@@ -7,7 +7,7 @@
 
     function UserController(user, auth, $stateParams){
       var vm = this;
-      //
+      vm.analyze = false
       // function handleRequest(res){
       //   var token = res.data ? res.data.token : null;
       //   console.log(res);

@@ -14,7 +14,6 @@ module.exports = {
     })
   },
   search: function(req,res){
-    console.log(req.body)
     MovieDB.searchMovie(req.body, function(err, response){
       res.json(response)
   })

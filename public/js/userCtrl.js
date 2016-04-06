@@ -1,45 +1,52 @@
 (function(){
   angular.module('allMovies')
-    .controller('UserController', UserCtrl)
+    .controller('UserController', UserController)
     .directive('profileChart', profileChart)
 
-    UserCtrl.$inject = ['user', 'auth']
+    UserController.$inject = ['user', 'auth', '$stateParams']
 
-    function UserCtrl(user, auth){
+    function UserController(user, auth, $stateParams){
       var vm = this;
+      //
+      // function handleRequest(res){
+      //   var token = res.data ? res.data.token : null;
+      //   console.log(res);
+      //   if (token){
+      //     console.log('JWT:', token);
+      //   };
+      //   // Set user and user id based on user that is sent back
+      //   console.log(res.data)
+      //   if(res.data){
+      //     vm.message = res.data.message;
+      //     vm.user = res.data.user
+      //     vm.id = res.data.user._id
+      //   }
+      // }
+      //
+      // vm.login = function() {
+      //   user.login(vm.email, vm.password)
+      //     .then(handleRequest, handleRequest);
+      // }
+      //
+      // vm.register = function() {
+      //   user.register(vm.email, vm.password)
+      //     .then(handleRequest, handleRequest);
+      // }
+      //
+      // vm.logout = function() {
+      //   auth.logout && auth.logout();
+      //   vm.message = 'You are logout now';
+      // }
+      //
+      // vm.isAuthed = function() {
+      //   return auth.isAuthed ? auth.isAuthed() : false;
+      // }
 
-      function handleRequest(res){
-        var token = res.data ? res.data.token : null;
-        console.log(res);
-        if (token){
-          console.log('JWT:', token);
-        };
-        // Set user and user id based on user that is sent back
-        console.log(res.data)
-        if(res.data){
-          vm.message = res.data.message;
-          vm.user = res.data.user
-          vm.id = res.data.user._id
-        }
-      }
-
-      vm.login = function() {
-        user.login(vm.email, vm.password)
-          .then(handleRequest, handleRequest);
-      }
-
-      vm.register = function() {
-        user.register(vm.email, vm.password)
-          .then(handleRequest, handleRequest);
-      }
-
-      vm.logout = function() {
-        auth.logout && auth.logout();
-        vm.message = 'You are logout now';
-      }
-
-      vm.isAuthed = function() {
-        return auth.isAuthed ? auth.isAuthed() : false;
+      vm.show = function(){
+        vm.show = true
+        user.show($stateParams.id).success(function(results){
+          vm.user = results
+        })
       }
 
       vm.edit = function(){
@@ -50,7 +57,7 @@
         }
 
       vm.update = function(){
-        user.update(vm.id,  vm.editingUser).success(function(results){
+        user.update($stateParams.id,  vm.editingUser).success(function(results){
           console.log(results)
           vm.editing = false
           vm.email = results.email
@@ -73,8 +80,9 @@
         })
       }
 
-      vm.removeMovie = function(){
-        user.remove().success(function(results){
+      vm.removeMovie = function(id){
+        console.log(id)
+        user.remove(id).success(function(results){
           console.log(results)
         })
       }
@@ -174,7 +182,7 @@
                   var xScale = d3.scale.linear()
                                 .domain([0, d3.max(dataset, function(d){ return d[1] })])
                                 .range([0, w])
-                          
+
 
 
 

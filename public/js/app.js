@@ -39,11 +39,13 @@
       })
       .state('signup', {
         url:'/signup',
-        templateUrl:'partials/signup.html'
+        templateUrl:'partials/signup.html',
+        controller:'UserController as user'
       })
       .state('profile', {
         url:'/users/:id',
-        templateUrl:'partials/profile.html'
+        templateUrl:'partials/profile.html',
+        controller:'UserController as user'
       })
       .state('movie', {
         url:'/movie',

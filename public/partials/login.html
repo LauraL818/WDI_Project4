@@ -1,4 +1,4 @@
-<div class="navbar-fixed">
+<!-- <div class="navbar-fixed">
 <nav>
   <div class="nav-wrapper">
     <a href="#!" class="brand-logo">Logo</a>
@@ -10,15 +10,13 @@
     </ul>
   </div>
 </nav>
-</div>
+</div> -->
 
-<input type="text" ng-model="user.email" placeholder="email"><br>
-<input type="password" ng-model="user.password" placeholder="password"><br>
+<input type="text" ng-model="global.loginUser.email" placeholder="email"><br>
+<input type="password" ng-model="global.loginUser.password" placeholder="password"><br>
 <br>
 
-<button ng-click="user.login()">Login</button>
+<button ng-click="global.login()">Login</button>
 
 
 <br><br>
-
-  {{user.message}}

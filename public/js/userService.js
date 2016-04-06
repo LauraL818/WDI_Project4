@@ -21,6 +21,10 @@
       })
     }
 
+    vm.show = function(id){
+      return $http.get('/users/' + id)
+    }
+
     vm.update = function(id, data){
       return $http.patch('/users/' + id, data)
     }
@@ -30,7 +34,7 @@
   }
 
     vm.remove = function(id){
-      return $http.delete('/users/profile/movies', {body: id})
+      return $http.delete('/users/profile/movies/' + id)
   }
 
   }

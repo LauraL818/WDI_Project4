@@ -17,7 +17,6 @@
       }
 
       vm.findMovie = function(){
-        console.log(vm.searchField)
         movieService.find(vm.searchField).success(function(results){
           vm.searchResults = results.results
         })

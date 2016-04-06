@@ -1,4 +1,4 @@
-<div class="navbar-fixed"  ng-init="movies.getMovies()">
+<!-- <div class="navbar-fixed"  ng-init="movies.getMovies()">
   <nav>
     <div class="nav-wrapper">
       <a href="#!" class="brand-logo">Logo</a>
@@ -10,11 +10,11 @@
       </ul>
     </div>
   </nav>
-</div>
+</div> -->
 
 <h1>Movie</h1>
 
-<form ng-submit="movies.findMovie()">
+<form ng-submit="movies.findMovie()" ng-init="movies.getMovies()">
  <div class="input-field">
    <input ng-model="movies.searchField" id="search" type="search" required>
    <label for="search"><i class="material-icons">search</i></label>

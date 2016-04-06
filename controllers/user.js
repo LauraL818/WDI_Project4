@@ -64,6 +64,13 @@ module.exports = {
     })
   },
 
+  user: function(req,res){
+    User.findOne({_id:req.params.id}, function(err, user){
+      if(err) throw err
+      res.json(user)
+    })
+  },
+
   delete: function(req,res){
     User.findOneAndRemove({_id:req.params.id}, function(err){
       if(err) throw err
@@ -95,6 +102,7 @@ module.exports = {
       })
     })
   },
+
   show: function(req,res){
     // console.log(req)
     User.findOne({_id: req.decoded._id})
@@ -103,12 +111,13 @@ module.exports = {
         res.json(user)
       })
   },
-  remove: function(req,res){
-    User.findOne({_id: req.decoded._id}, function(err, user){
-      console.log(req)
-      if(err) throw err
-      var movieIndex = user.movies.indexOf(req.body.id)
 
+  remove: function(req,res){
+    console.log(req.params)
+    User.findOne({_id: req.decoded._id}, function(err, user){
+      if(err) throw err
+      // console.log(req.body)
+      var movieIndex = user.movies.indexOf(req.params.id)
       user.movies.splice(movieIndex,1)
       user.save()
     })

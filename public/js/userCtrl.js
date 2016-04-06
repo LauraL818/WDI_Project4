@@ -148,7 +148,6 @@
                   return d[0] * 2
                 })
 
-
                 svg.selectAll("text")
                   .data(dataset)
                   .enter()
@@ -166,6 +165,16 @@
                    .attr("font-size", "11px")
                    .attr("fill", "white");
 
+                 var scale = d3.scale.linear()
+                              .domain([0,500])
+                              .range([0,500])
+
+
+
+                  var xScale = d3.scale.linear()
+                                .domain([0, d3.max(dataset, function(d){ return d[1] })])
+                                .range([0, w])
+                          
 
 
 

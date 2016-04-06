@@ -80,10 +80,14 @@
         })
       }
 
-      vm.removeMovie = function(id){
-        console.log(id)
-        user.remove(id).success(function(results){
-          console.log(results)
+      vm.removeMovie = function(film){
+        console.log(film)
+        user.remove(film._id).success(function(results){
+          var index = vm.userMovies.indexOf(film)
+          vm.userMovies.splice(index,1)
+          console.log(vm.userMovies)
+          // vm.userMovies.splice()
+          // console.log(results)
         })
       }
     }

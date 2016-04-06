@@ -1,6 +1,6 @@
 (function(){
   angular.module('allMovies')
-    .service('movieService', movieService)
+    .factory('movieService', movieService)
 
     movieService.$inject = ['$http']
 
@@ -28,7 +28,6 @@
       function add(data){
         return $http.post('/users/addMovies', data)
       }
-      
 
     }
 

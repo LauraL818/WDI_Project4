@@ -93,13 +93,13 @@
               var rev = scope.revenue.replace(/((\[)|(\]))/g,"").split(",")
               var revenue = []
               for(var i=0; i < rev.length; i++){
-                revenue.push(parseInt(rev[i])/100)
+                revenue.push(parseInt(rev[i])/10)
               }
 
               var bud = scope.budget.replace(/((\[)|(\]))/g,"").split(",")
               var budget = []
               for(var i=0; i < bud.length; i++){
-                budget.push(parseInt(bud[i])/100)
+                budget.push(parseInt(bud[i])/10)
               }
 
               var rat = scope.rating.replace(/((\[)|(\]))/g,"").split(",")
@@ -111,9 +111,17 @@
 
               ///////////////////////// DATA FOR SCATTER PLOT //////////////////
               var dataset = []
-              dataset.push(rating)
-              dataset.push(budget)
-              dataset.push(revenue)
+              for(var i = 0; i < rating.length; i ++){
+                var arr = []
+                arr.push(rating[i])
+                arr.push(budget[i])
+                arr.push(revenue[i])
+                dataset.push(arr)
+              }
+              // dataset.push(rating)
+              // dataset.push(budget)
+              // dataset.push(revenue)
+              console.log(arr)
               console.log(dataset)
               ///////////////////////// END SCATTER PLOT //////////////////////
 
@@ -139,6 +147,24 @@
                 .attr("r", function(d){
                   return d[0] * 2
                 })
+
+
+                svg.selectAll("text")
+                  .data(dataset)
+                  .enter()
+                  .append("text")
+                  .text(function(d) {
+                        return d[0]
+                   })
+                   .attr("x", function(d) {
+                        return d[1] * 5
+                   })
+                   .attr("y", function(d) {
+                        return d[2] * 5
+                   })
+                   .attr("font-family", "sans-serif")
+                   .attr("font-size", "11px")
+                   .attr("fill", "white");
 
 
 

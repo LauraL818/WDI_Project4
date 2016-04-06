@@ -1,11 +1,10 @@
 var User = require('../models/User.js')
 var jwt = require('jsonwebtoken')
 var express = require('express')
-var app = express()
 var Movie = require('../models/Movie.js')
 var config = require('../config.js')
-// JWT
-app.set('superSecret', config.secret)
+// var app = express()
+// app.set('superSecret', config.secret)
 
 module.exports = {
   index: function(req,res){
@@ -31,7 +30,7 @@ module.exports = {
       if(err) throw err
       console.log('User was saved')
 
-      var token = jwt.sign(newUser.toObject(), app.get('superSecret'), {
+      var token = jwt.sign(newUser.toObject(), config.secret, {
         expiresIn: 6000
       })
 
@@ -50,7 +49,7 @@ module.exports = {
         if (!user.validPassword(req.body.password)){
           res.json({success:false, message:'Wrong password'})
         } else {
-          var token = jwt.sign(user.toObject(), app.get('superSecret'), {
+          var token = jwt.sign(user.toObject(), config.secret, {
             expiresIn:6000
           })
 
@@ -84,14 +83,12 @@ module.exports = {
       if(err) throw err
       Movie.create(req.body, function(err, movie){
         if(err) return console.log(err)
-        console.log(movie)
         movie.users.push(user)
         movie.save(function(err, movie){
           user.movies.push(movie)
           user.save(function(err, newUser){
             console.log(newUser)
             if(err) throw err
-            // console.log(newUser)
             res.json(newUser)
           })
         })

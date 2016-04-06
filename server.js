@@ -17,6 +17,7 @@ var
   jwt = require('jsonwebtoken'),
   config = require('./config.js'),
   User = require('./models/User.js')
+  // dotenv = require('dotenv').load({silent:true})
 
   var db = config.database
 
@@ -25,7 +26,7 @@ var
   console.log('Connected to database ' + db)
 })
 
-app.set('superSecret', config.secret); // secret variable
+  app.set('superSecret', config.secret); // secret variable
 
 // Middleware
 app.use(bodyParser.json())

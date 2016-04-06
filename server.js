@@ -18,8 +18,8 @@ var
   config = require('./config.js'),
   User = require('./models/User.js')
   // dotenv = require('dotenv').load({silent:true})
-// process.env.MLAB_DB_URL ||
-var db =  config.database
+
+var db = process.env.MLAB_DB_URL || config.database
 
 mongoose.connect(db, function(err){
   if (err) return console.log(err)

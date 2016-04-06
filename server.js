@@ -41,6 +41,11 @@ app.use('/movies', movieRoutes)
 // User Routes
 app.use('/auth', authRoutes)
 
+// Root Path
+app.get('*', function(req,res){
+  res.sendFile(__dirname + '/public/index.html')
+})
+
 // route middleware to verify token
 app.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token']
@@ -65,11 +70,6 @@ app.use(function(req, res, next){
 
 // User Routes
 app.use('/users', userRoutes)
-
-// Root Path
-app.get('*', function(req,res){
-  res.sendFile(__dirname + '/public/index.html')
-})
 
 var PORT = process.env.PORT || 3000
 app.listen(PORT, function(){

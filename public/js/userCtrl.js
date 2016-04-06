@@ -93,13 +93,13 @@
               var rev = scope.revenue.replace(/((\[)|(\]))/g,"").split(",")
               var revenue = []
               for(var i=0; i < rev.length; i++){
-                revenue.push(parseInt(rev[i]))
+                revenue.push(parseInt(rev[i])/100)
               }
 
               var bud = scope.budget.replace(/((\[)|(\]))/g,"").split(",")
               var budget = []
               for(var i=0; i < bud.length; i++){
-                budget.push(parseInt(bud[i]))
+                budget.push(parseInt(bud[i])/100)
               }
 
               var rat = scope.rating.replace(/((\[)|(\]))/g,"").split(",")
@@ -107,9 +107,47 @@
               for(var i=0; i < rat.length; i++){
                 rating.push(parseInt(rat[i]))
               }
-                ///////////////////// END CONVERTING DATA //////////////////
+              ///////////////////////// END CONVERTING DATA ////////////////////
 
-                ///////////////////// START D3 BAR CHART //////////////////
+              ///////////////////////// DATA FOR SCATTER PLOT //////////////////
+              var dataset = []
+              dataset.push(rating)
+              dataset.push(budget)
+              dataset.push(revenue)
+              console.log(dataset)
+              ///////////////////////// END SCATTER PLOT //////////////////////
+
+              //////////////////////// START D3 SCATTER PLOT /////////////////////
+              var w = 500;
+              var h = 1000;
+
+              var svg = d3.select("#scatter")
+                          .append("svg")
+                          .attr("width", w)
+                          .attr("height", h)
+
+              svg.selectAll("circle")
+                .data(dataset)
+                .enter()
+                .append("circle")
+                .attr("cx", function(d){
+                  return d[1] * 5
+                })
+                .attr("cy", function(d){
+                  return d[2] * 5
+                })
+                .attr("r", function(d){
+                  return d[0] * 2
+                })
+
+
+
+
+
+
+
+
+              //////////////////////// START D3 BAR CHART /////////////////////
                       var svg = d3.select("#profile")
                                     .append("svg")
                                     .attr("width", 900)
@@ -129,7 +167,7 @@
                             .attr("x", function(d, i) {
                               return i * 60;
                             })
-                  ///////////////////// END D3 BAR CHART //////////////////
+              ///////////////////////// END D3 BAR CHART //////////////////
             }
       }
       return directive

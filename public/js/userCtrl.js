@@ -1,6 +1,7 @@
 (function(){
   angular.module('allMovies')
-    .controller('User', UserCtrl)
+    .controller('UserController', UserCtrl)
+    .directive('profileChart', profileChart)
 
     UserCtrl.$inject = ['user', 'auth']
 
@@ -14,12 +15,12 @@
           console.log('JWT:', token);
         };
         // Set user and user id based on user that is sent back
-        if(res.data.user){
+        console.log(res.data)
+        if(res.data){
           vm.message = res.data.message;
           vm.user = res.data.user
           vm.id = res.data.user._id
         }
-
       }
 
       vm.login = function() {
@@ -42,7 +43,6 @@
       }
 
       vm.edit = function(){
-        // set new user email variable
           vm.editing = true
           vm.editingUser = {
             email: vm.email
@@ -60,6 +60,16 @@
       vm.getUserMovies = function(){
         user.movies().success(function(results){
           vm.userMovies = results.movies
+          ///////////// DATA FOR D3 CHARTS ///////////////////////////
+          vm.revenues = []
+          vm.budgets = []
+          vm.ratings = []
+          /////////// FOR LOOP TO GET DATA FOR D3 CHARTS/////////////
+          for(var i = 0; i<vm.userMovies.length; i++){
+            vm.revenues.push(vm.userMovies[i].revenue)
+            vm.budgets.push(vm.userMovies[i].budget)
+            vm.ratings.push(vm.userMovies[i].rating)
+          }
         })
       }
 
@@ -68,7 +78,61 @@
           console.log(results)
         })
       }
+    }
 
+    function profileChart(){
+      var directive = {
+        restrict:'EA',
+          scope: {
+            revenue: '@',
+            rating:'@',
+            budget:'@'
+          },
+          link: function(scope,el){
+            /////////// START CONVERTING STRING DATA INTO INTEGERS////////////
+              var rev = scope.revenue.replace(/((\[)|(\]))/g,"").split(",")
+              var revenue = []
+              for(var i=0; i < rev.length; i++){
+                revenue.push(parseInt(rev[i]))
+              }
+
+              var bud = scope.budget.replace(/((\[)|(\]))/g,"").split(",")
+              var budget = []
+              for(var i=0; i < bud.length; i++){
+                budget.push(parseInt(bud[i]))
+              }
+
+              var rat = scope.rating.replace(/((\[)|(\]))/g,"").split(",")
+              var rating = []
+              for(var i=0; i < rat.length; i++){
+                rating.push(parseInt(rat[i]))
+              }
+                ///////////////////// END CONVERTING DATA //////////////////
+
+                ///////////////////// START D3 BAR CHART //////////////////
+                      var svg = d3.select("#profile")
+                                    .append("svg")
+                                    .attr("width", 900)
+                                    .attr("height", 900)
+
+                      var group = svg.selectAll("g")
+                          .data(rating)
+                          .enter()
+                          .append("g")
+
+                          group.append("rect")
+                            .attr("width", "20px")
+                            .attr("fill", "green")
+                            .attr("height", function(d) {
+                              return d + "px";
+                            })
+                            .attr("x", function(d, i) {
+                              return i * 60;
+                            })
+                  ///////////////////// END D3 BAR CHART //////////////////
+            }
+      }
+      return directive
     }
 
 

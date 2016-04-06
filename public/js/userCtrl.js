@@ -136,8 +136,8 @@
 
               //////////////////////// START D3 SCATTER PLOT /////////////////////
               var w = 1200
-              var h = 200
-              var padding = 20
+              var h = 450
+              var padding = 35
 
               var svg = d3.select("#scatter")
                           .append("svg")
@@ -145,7 +145,7 @@
                           .attr("height", h)
 
               var rScale = d3.scale.linear()
-                           .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+                           .domain([0, d3.max(dataset, function(d) { return d[0] })])
                            .range([2, 20]);
 
               var xScale = d3.scale.linear()
@@ -153,9 +153,18 @@
                             .range([padding, w - padding * 2])
 
               var yScale = d3.scale.linear()
-                            .domain([0, d3.max(dataset, function(d){ return d[2] }) + 10])
+                            .domain([0, d3.max(dataset, function(d){ return d[2] })])
                             .range([h - padding, padding])
 
+              var xAxis = d3.svg.axis()
+                  .scale(xScale)
+                  .orient("bottom")
+                  .ticks(8)
+
+              var yAxis = d3.svg.axis()
+                  .scale(yScale)
+                  .orient("left")
+                  .ticks(8)
 
               svg.selectAll("circle")
                 .data(dataset)
@@ -188,6 +197,15 @@
                    .attr("font-size", "11px")
                    .attr("fill", "white");
 
+                   svg.append("g")
+                     .attr("class", "axis")
+                     .attr("transform", "translate(0," + (h - padding) + ")")
+                     .call(xAxis)
+
+                   svg.append("g")
+                       .attr("class", "axis")
+                       .attr("transform", "translate(" + padding + ",0)")
+                       .call(yAxis)
 
 
 

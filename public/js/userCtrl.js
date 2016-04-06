@@ -71,11 +71,13 @@
           vm.revenues = []
           vm.budgets = []
           vm.ratings = []
+          vm.titles = []
           /////////// FOR LOOP TO GET DATA FOR D3 CHARTS/////////////
           for(var i = 0; i<vm.userMovies.length; i++){
             vm.revenues.push(vm.userMovies[i].revenue)
             vm.budgets.push(vm.userMovies[i].budget)
             vm.ratings.push(vm.userMovies[i].rating)
+            vm.titles.push(vm.userMovies[i].title)
           }
         })
       }
@@ -95,7 +97,8 @@
           scope: {
             revenue: '@',
             rating:'@',
-            budget:'@'
+            budget:'@',
+            title:'@'
           },
           link: function(scope,el){
             /////////// START CONVERTING STRING DATA INTO INTEGERS////////////
@@ -116,6 +119,13 @@
               for(var i=0; i < rat.length; i++){
                 rating.push(parseInt(rat[i]))
               }
+
+              var t = scope.title.replace(/((\[)|(\]))/g,"").split(",")
+              var title = []
+              for(var i=0; i < rat.length; i++){
+                title.push(t[i].replace(/["']/g, ""))
+              }
+
               ///////////////////////// END CONVERTING DATA ////////////////////
 
               ///////////////////////// DATA FOR SCATTER PLOT //////////////////
@@ -125,6 +135,7 @@
                 arr.push(rating[i])
                 arr.push(budget[i])
                 arr.push(revenue[i])
+                arr.push(title[i])
                 dataset.push(arr)
               }
               // dataset.push(rating)
@@ -143,6 +154,15 @@
                           .append("svg")
                           .attr("width", w)
                           .attr("height", h)
+
+              var tooltip = d3.select("svg")
+                          .append("text")
+                          .attr("class", "tooltip")
+                          .style("opacity", 0)
+                          .style("text-anchor","end")
+                          .attr("startOffset","100%")
+                          .attr("fill", "black")
+
 
               var rScale = d3.scale.linear()
                            .domain([0, d3.max(dataset, function(d) { return d[0] })])
@@ -166,7 +186,7 @@
                   .orient("left")
                   .ticks(8)
 
-              svg.selectAll("circle")
+              var circles = svg.selectAll("circle")
                 .data(dataset)
                 .enter()
                 .append("circle")
@@ -179,23 +199,49 @@
                 .attr("r", function(d){
                   return rScale(d[0])
                 })
+                .attr("fill", "grey")
+                .style("opacity", 1)
+                .style('stroke', 'black')
+                .style('stroke-width', '3')
 
-                svg.selectAll("text")
-                  .data(dataset)
-                  .enter()
-                  .append("text")
-                  .text(function(d) {
-                        return d[0]
-                   })
-                   .attr("x", function(d) {
-                        return xScale(d[1])
-                   })
-                   .attr("y", function(d) {
-                        return yScale(d[2])
-                   })
-                   .attr("font-family", "sans-serif")
-                   .attr("font-size", "11px")
-                   .attr("fill", "white");
+              circles
+                .on("mouseover", function(d) {
+                      circles.style("opacity", .1)
+                      tooltip.transition()
+                          .duration(200)
+                          .style("opacity", 1);
+                          // "<strong>Rating:</strong> <span style='color:black'>" +  d[0] + "</span>"
+                      tooltip
+                          .html(d[3])
+                          .attr("x", xScale(d[1]))
+                          .attr("y", yScale(d[2]))
+                          .style("z-index", 100)
+                  })
+                .on("mouseout", function(d) {
+                     circles.style("opacity", 1)
+                     tooltip.transition()
+                         .duration(200)
+                         .style("opacity", 0);
+                 })
+
+
+                // svg.selectAll("text")
+                //   .data(dataset)
+                //   .enter()
+                //   .append("text")
+                //   .text(function(d) {
+                //         return d[0]
+                //    })
+                //    .attr("x", function(d) {
+                //         return xScale(d[1])
+                //    })
+                //    .attr("y", function(d) {
+                //         return yScale(d[2])
+                //    })
+                //    .attr("font-family", "sans-serif")
+                //    .attr("font-size", "11px")
+                //    .attr("fill", "white")
+
 
                    svg.append("g")
                      .attr("class", "axis")

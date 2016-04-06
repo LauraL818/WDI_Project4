@@ -148,7 +148,8 @@
               //////////////////////// START D3 SCATTER PLOT /////////////////////
               var w = 1200
               var h = 450
-              var padding = 35
+
+              var padding = 60
 
               var svg = d3.select("#scatter")
                           .append("svg")
@@ -186,6 +187,7 @@
                   .orient("left")
                   .ticks(8)
 
+
               var circles = svg.selectAll("circle")
                 .data(dataset)
                 .enter()
@@ -204,15 +206,12 @@
                 .style('stroke', 'black')
                 .style('stroke-width', '3')
 
-              circles
-                .on("mouseover", function(d) {
+              circles.on("mouseover", function(d) {
                       circles.style("opacity", .1)
                       tooltip.transition()
                           .duration(200)
                           .style("opacity", 1);
-                          // "<strong>Rating:</strong> <span style='color:black'>" +  d[0] + "</span>"
-                      tooltip
-                          .html(d[3])
+                      tooltip.html(d[3])
                           .attr("x", xScale(d[1]))
                           .attr("y", yScale(d[2]))
                           .style("z-index", 100)
@@ -241,7 +240,20 @@
                 //    .attr("font-family", "sans-serif")
                 //    .attr("font-size", "11px")
                 //    .attr("fill", "white")
+                  svg.append("text")
+                  .attr("class", "x label")
+                  .attr("text-anchor", "end")
+                  .attr("x", w/2)
+                  .attr("y", h - 6)
+                  .text("Budget")
 
+                  svg.append("text")
+                     .attr("transform", "rotate(-90)")
+                     .attr("y", 0)
+                     .attr("x",0 - (h / 2))
+                     .attr("dy", "1em")
+                     .style("text-anchor", "middle")
+                     .text("Revenue");
 
                    svg.append("g")
                      .attr("class", "axis")

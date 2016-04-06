@@ -28,6 +28,8 @@
       function add(data){
         return $http.post('/users/addMovies', data)
       }
+      
+
     }
 
 

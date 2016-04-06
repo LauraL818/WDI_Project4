@@ -12,8 +12,9 @@ userRouter.route('/:id')
 
 userRouter.route('/addMovies')
   .post(userCtrl.add)
-  
+
 userRouter.route('/profile/movies')
   .get(userCtrl.show)
+  .delete(userCtrl.remove)
 
 module.exports = userRouter

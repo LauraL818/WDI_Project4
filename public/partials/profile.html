@@ -22,15 +22,13 @@
 	<button type="submit">Update User!</button>
 </form>
 
-<!-- <ul>
-  <h3 ng-repeat="film in user.userMovies">{{film.title}}</h3><img ng-src="http://image.tmdb.org/t/p/w500{{film.poster}}" alt="" height="250px" width="200px"/>
-</ul> -->
 
 <div class="container">
   <div class="row">
-    <div ng-repeat="film in user.userMovies"  ui-sref="dashboard({id: film.id})">{{film.title}}
+    <div ng-repeat="film in user.userMovies" >{{film._title}}{{film._id}}
       <br>
       <img  ui-sref="dashboard({id: film.id})" ng-src="http://image.tmdb.org/t/p/w500{{film.poster}}" alt="" width="150px" height="200px" />
+      <button ng-click="user.removeMovie()">Delete Film</button>
     </div>
    </div>
  </div>

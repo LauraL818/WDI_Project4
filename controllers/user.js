@@ -96,26 +96,6 @@ module.exports = {
           })
         })
       })
-
-
-
-      // var movie = new Movie(req.body)
-      //
-      //   movie.save(function(err, movie){
-      //
-      //     if(err) throw err
-      //     movie.users.push(user)
-      //     movie.save(function(err,movie){
-      //         user.movies.push(movie)
-      //
-      //         user.save(function(err, newUser){
-      //           console.log(newUser)
-      //           if(err) throw err
-      //           // console.log(newUser)
-      //           res.json(newUser)
-      //       })
-      //     })
-      // })
     })
   },
   show: function(req,res){
@@ -125,6 +105,20 @@ module.exports = {
       .exec(function(err,user){
         res.json(user)
       })
+  },
+  remove: function(req,res){
+    User.findOne({_id: req.decoded._id}, function(err, user){
+      console.log(req)
+      if(err) throw err
+      var movieIndex = user.movies.indexOf(req.body.id)
+
+      user.movies.splice(movieIndex,1)
+      user.save()
+    })
+    Movie.findOneAndRemove({_id: req.body.id}, function(err, user){
+      if(err) throw err
+    })
+    res.json({success:true})
   }
 
 }

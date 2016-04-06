@@ -29,5 +29,9 @@
       return $http.get('/users/profile/movies')
   }
 
+    vm.remove = function(id){
+      return $http.delete('/users/profile/movies', {body: id})
+  }
+
   }
 })()

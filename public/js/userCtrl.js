@@ -62,6 +62,15 @@
           vm.userMovies = results.movies
         })
       }
+
+      vm.removeMovie = function(){
+        user.remove().success(function(results){
+          console.log(results)
+        })
+      }
+
     }
+
+
 
 })()

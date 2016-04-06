@@ -85,9 +85,6 @@
         user.remove(film._id).success(function(results){
           var index = vm.userMovies.indexOf(film)
           vm.userMovies.splice(index,1)
-          console.log(vm.userMovies)
-          // vm.userMovies.splice()
-          // console.log(results)
         })
       }
     }
@@ -133,7 +130,7 @@
               // dataset.push(rating)
               // dataset.push(budget)
               // dataset.push(revenue)
-              console.log(arr)
+              // console.log(arr)
               console.log(dataset)
               ///////////////////////// END SCATTER PLOT //////////////////////
 

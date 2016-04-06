@@ -135,23 +135,32 @@
               ///////////////////////// END SCATTER PLOT //////////////////////
 
               //////////////////////// START D3 SCATTER PLOT /////////////////////
-              var w = 500;
-              var h = 600;
+              var w = 1200;
+              var h = 200;
 
               var svg = d3.select("#scatter")
                           .append("svg")
                           .attr("width", w)
                           .attr("height", h)
 
+              var xScale = d3.scale.linear()
+                            .domain([0, d3.max(dataset, function(d){ return d[1] }) + 10])
+                            .range([0, w])
+
+              var yScale = d3.scale.linear()
+                            .domain([0, d3.max(dataset, function(d){ return d[2] }) + 10])
+                            .range([0, h])
+
+
               svg.selectAll("circle")
                 .data(dataset)
                 .enter()
                 .append("circle")
                 .attr("cx", function(d){
-                  return d[1] * 5
+                  return xScale(d[1])
                 })
                 .attr("cy", function(d){
-                  return d[2] * 5
+                  return yScale(d[2])
                 })
                 .attr("r", function(d){
                   return d[0] * 2
@@ -165,24 +174,14 @@
                         return d[0]
                    })
                    .attr("x", function(d) {
-                        return d[1] * 5
+                        return xScale(d[1])
                    })
                    .attr("y", function(d) {
-                        return d[2] * 5
+                        return yScale(d[2])
                    })
                    .attr("font-family", "sans-serif")
                    .attr("font-size", "11px")
                    .attr("fill", "white");
-
-                 var scale = d3.scale.linear()
-                              .domain([0,500])
-                              .range([0,500])
-
-
-
-                  var xScale = d3.scale.linear()
-                                .domain([0, d3.max(dataset, function(d){ return d[1] })])
-                                .range([0, w])
 
 
 
@@ -211,7 +210,7 @@
                             .attr("x", function(d, i) {
                               return i * 60;
                             })
-              ///////////////////////// END D3 BAR CHART //////////////////
+              // ///////////////////////// END D3 BAR CHART //////////////////
             }
       }
       return directive

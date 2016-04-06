@@ -138,10 +138,6 @@
                 arr.push(title[i])
                 dataset.push(arr)
               }
-              // dataset.push(rating)
-              // dataset.push(budget)
-              // dataset.push(revenue)
-              // console.log(arr)
               console.log(dataset)
               ///////////////////////// END SCATTER PLOT //////////////////////
 
@@ -163,7 +159,6 @@
                           .style("text-anchor","end")
                           .attr("startOffset","100%")
                           .attr("fill", "black")
-
 
               var rScale = d3.scale.linear()
                            .domain([0, d3.max(dataset, function(d) { return d[0] })])
@@ -211,10 +206,10 @@
                       tooltip.transition()
                           .duration(200)
                           .style("opacity", 1);
-                      tooltip.html(d[3])
+                      tooltip.text(d[3])
                           .attr("x", xScale(d[1]))
                           .attr("y", yScale(d[2]))
-                          .style("z-index", 100)
+
                   })
                 .on("mouseout", function(d) {
                      circles.style("opacity", 1)
@@ -223,29 +218,12 @@
                          .style("opacity", 0);
                  })
 
-
-                // svg.selectAll("text")
-                //   .data(dataset)
-                //   .enter()
-                //   .append("text")
-                //   .text(function(d) {
-                //         return d[0]
-                //    })
-                //    .attr("x", function(d) {
-                //         return xScale(d[1])
-                //    })
-                //    .attr("y", function(d) {
-                //         return yScale(d[2])
-                //    })
-                //    .attr("font-family", "sans-serif")
-                //    .attr("font-size", "11px")
-                //    .attr("fill", "white")
                   svg.append("text")
-                  .attr("class", "x label")
-                  .attr("text-anchor", "end")
-                  .attr("x", w/2)
-                  .attr("y", h - 6)
-                  .text("Budget")
+                      .attr("class", "x label")
+                      .attr("text-anchor", "end")
+                      .attr("x", w/2)
+                      .attr("y", h - 6)
+                      .text("Budget")
 
                   svg.append("text")
                      .attr("transform", "rotate(-90)")
@@ -264,12 +242,6 @@
                        .attr("class", "axis")
                        .attr("transform", "translate(" + padding + ",0)")
                        .call(yAxis)
-
-
-
-
-
-
 
               //////////////////////// START D3 BAR CHART /////////////////////
                       var svg = d3.select("#profile")

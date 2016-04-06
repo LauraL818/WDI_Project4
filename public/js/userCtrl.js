@@ -13,11 +13,13 @@
         if (token){
           console.log('JWT:', token);
         };
-
         // Set user and user id based on user that is sent back
-        vm.message = res.data.message;
-        vm.user = res.data.user
-        vm.id = res.data.user._id
+        if(res.data.user){
+          vm.message = res.data.message;
+          vm.user = res.data.user
+          vm.id = res.data.user._id
+        }
+
       }
 
       vm.login = function() {
@@ -52,6 +54,12 @@
           console.log(results)
           vm.editing = false
           vm.email = results.email
+        })
+      }
+
+      vm.getUserMovies = function(){
+        user.movies().success(function(results){
+          vm.userMovies = results.movies
         })
       }
     }

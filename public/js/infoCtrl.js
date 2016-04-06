@@ -13,15 +13,25 @@
         movieService.show($stateParams.id).success(function(results){
           console.log(results)
           vm.main = false
-          vm.details = false
           vm.overview = false
           vm.movie = results
+          vm.poster = results.poster_path
+          vm.details = results.overview
           vm.uneditedDate = results.release_date
           vm.release = moment(vm.uneditedDate).format('MMMM DD, YYYY')
-          vm.revenue = results.revenue/1000000
+          vm.revenue = Math.floor(results.revenue/1000000)
           vm.rating = results.vote_average
           vm.budget = results.budget/1000000
+          vm.title = results.title
+          vm.runtime = results.runtime
+          vm.id = results.id
 
+        })
+      }
+
+      vm.addMovie = function(){
+        movieService.add({title:vm.title, release:vm.release, poster: vm.poster,overview: vm.details,revenue:vm.revenue,budget: vm.budget,rating: vm.rating,runtime: vm.runtime, id: vm.id}).success(function(results){
+          console.log(results)
         })
       }
     }
@@ -45,8 +55,8 @@
                   //  var data = scope.revenue
                   var config = liquidFillGaugeDefaultSettings();
                   config.circleColor = "blue";
-                  config.textColor = "#553300";
-                  config.waveTextColor = "blue";
+                  config.textColor = "white";
+                  config.waveTextColor = "white";
                   config.waveColor = "blue";
                   config.circleThickness = 0.1;
                   config.circleFillGap = 0.2;

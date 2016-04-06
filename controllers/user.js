@@ -2,6 +2,7 @@ var User = require('../models/User.js')
 var jwt = require('jsonwebtoken')
 var express = require('express')
 var app = express()
+var Movie = require('../models/Movie.js')
 var config = require('../config.js')
 // JWT
 app.set('superSecret', config.secret)
@@ -13,13 +14,6 @@ module.exports = {
       res.json(users)
     })
   },
-
-  // create: function(req,res){
-  //   User.create(req.body, function(err,user){
-  //     if(err) throw err
-  //     res.json(user)
-  //   })
-  // },
 
   //create user and assign token
   create: function(req,res){
@@ -37,7 +31,7 @@ module.exports = {
       if(err) throw err
       console.log('User was saved')
 
-      var token = jwt.sign(newUser, app.get('superSecret'), {
+      var token = jwt.sign(newUser.toObject(), app.get('superSecret'), {
         expiresIn: 6000
       })
 
@@ -71,13 +65,6 @@ module.exports = {
     })
   },
 
-  // show: function(req,res){
-  //   User.findOne({_id:req.params.id}, function(err,user){
-  //     if(err) throw err
-  //     res.json(user)
-  //   })
-  // },
-
   delete: function(req,res){
     User.findOneAndRemove({_id:req.params.id}, function(err){
       if(err) throw err
@@ -89,6 +76,55 @@ module.exports = {
       if(err) throw err
       res.json(user)
     })
+  },
+
+// Find user and add movie to that user
+  add: function(req, res){
+    User.findOne({_id: req.decoded._id}, function(err, user){
+      if(err) throw err
+      Movie.create(req.body, function(err, movie){
+        if(err) return console.log(err)
+        console.log(movie)
+        movie.users.push(user)
+        movie.save(function(err, movie){
+          user.movies.push(movie)
+          user.save(function(err, newUser){
+            console.log(newUser)
+            if(err) throw err
+            // console.log(newUser)
+            res.json(newUser)
+          })
+        })
+      })
+
+
+
+      // var movie = new Movie(req.body)
+      //
+      //   movie.save(function(err, movie){
+      //
+      //     if(err) throw err
+      //     movie.users.push(user)
+      //     movie.save(function(err,movie){
+      //         user.movies.push(movie)
+      //
+      //         user.save(function(err, newUser){
+      //           console.log(newUser)
+      //           if(err) throw err
+      //           // console.log(newUser)
+      //           res.json(newUser)
+      //       })
+      //     })
+      // })
+    })
+  },
+  show: function(req,res){
+    // console.log(req)
+    User.findOne({_id: req.decoded._id})
+      .populate("movies")
+      .exec(function(err,user){
+        res.json(user)
+      })
   }
 
 }

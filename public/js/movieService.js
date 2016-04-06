@@ -8,7 +8,8 @@
       var service = {
         index: index,
         show: show,
-        find: find
+        find: find,
+        add: add
       }
       return service
 
@@ -23,6 +24,11 @@
       function find(movie){
         return $http.post('/movies/search/movie', {query:movie})
       }
+
+      function add(data){
+        return $http.post('/users/addMovies', data)
+      }
     }
+
 
 })()

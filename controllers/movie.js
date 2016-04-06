@@ -18,5 +18,6 @@ module.exports = {
     MovieDB.searchMovie(req.body, function(err, response){
       res.json(response)
   })
- }
+}
+
 }

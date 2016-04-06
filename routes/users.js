@@ -7,8 +7,13 @@ userRouter.route('/')
   .get(userCtrl.index)
 
 userRouter.route('/:id')
-  // .get(userCtrl.show)
   .delete(userCtrl.delete)
   .patch(userCtrl.update)
+
+userRouter.route('/addMovies')
+  .post(userCtrl.add)
+  
+userRouter.route('/profile/movies')
+  .get(userCtrl.show)
 
 module.exports = userRouter

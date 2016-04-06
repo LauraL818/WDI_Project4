@@ -19,11 +19,15 @@
         email: email,
         password: password
       })
-  }
+    }
 
     vm.update = function(id, data){
       return $http.patch('/users/' + id, data)
     }
+
+    vm.movies = function(){
+      return $http.get('/users/profile/movies')
+  }
 
   }
 })()

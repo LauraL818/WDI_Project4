@@ -22,6 +22,5 @@
           vm.searchResults = results.results
         })
       }
-
     }
 })()

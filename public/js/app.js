@@ -55,10 +55,5 @@
         templateUrl:'partials/dashboard.html',
         controller:'InfoController as info'
       })
-      .state('search', {
-        url:'/movies/search',
-        templateUrl:'partials/search.html',
-        controller:'MovieController as movies'
-      })
     }
 })()

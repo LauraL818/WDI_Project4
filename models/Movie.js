@@ -11,12 +11,10 @@ var movieSchema = new Schema({
   budget: Number,
   rating: Number,
   runtime: Number,
-  company: String,
-  genre: String,
-  country: String,
+  id: String,
   users:[{type: Schema.Types.ObjectId, ref: "User"}]
 })
 
-var Movie = mongoose.model('Movie', movieSchema)
+var Movie = mongoose.model("Movie", movieSchema)
 
 module.exports = Movie

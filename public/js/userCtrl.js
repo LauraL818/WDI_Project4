@@ -135,21 +135,26 @@
               ///////////////////////// END SCATTER PLOT //////////////////////
 
               //////////////////////// START D3 SCATTER PLOT /////////////////////
-              var w = 1200;
-              var h = 200;
+              var w = 1200
+              var h = 200
+              var padding = 20
 
               var svg = d3.select("#scatter")
                           .append("svg")
                           .attr("width", w)
                           .attr("height", h)
 
+              var rScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+                           .range([2, 20]);
+
               var xScale = d3.scale.linear()
                             .domain([0, d3.max(dataset, function(d){ return d[1] }) + 10])
-                            .range([0, w])
+                            .range([padding, w - padding * 2])
 
               var yScale = d3.scale.linear()
                             .domain([0, d3.max(dataset, function(d){ return d[2] }) + 10])
-                            .range([0, h])
+                            .range([h - padding, padding])
 
 
               svg.selectAll("circle")
@@ -163,7 +168,7 @@
                   return yScale(d[2])
                 })
                 .attr("r", function(d){
-                  return d[0] * 2
+                  return rScale(d[0])
                 })
 
                 svg.selectAll("text")

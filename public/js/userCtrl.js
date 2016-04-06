@@ -127,7 +127,7 @@
 
               //////////////////////// START D3 SCATTER PLOT /////////////////////
               var w = 500;
-              var h = 1000;
+              var h = 600;
 
               var svg = d3.select("#scatter")
                           .append("svg")

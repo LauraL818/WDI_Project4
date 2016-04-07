@@ -15,8 +15,10 @@
         if (token){
           console.log('JWT:', token);
         }
+        if(res.data.user){
           $window.localStorage['currentUser'] = res.data.user._id
           vm.user = res.data.user
+          }
       }
 
       vm.login = function() {

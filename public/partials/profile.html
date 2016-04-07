@@ -1,8 +1,8 @@
 <!-- USER EDIT -->
-<button ng-click="user.show(); user.show = false">Show</button>
+<button ng-click="user.display()" ng-show="!user.active">Show</button>
 
 
-<div ng-hide="user.show">
+<div ng-show="!user.editing" ng-hide="!user.active">
   <h5>{{user.user.email}}</h5>
   <button ng-click="user.edit()">Edit</button>
 </div>

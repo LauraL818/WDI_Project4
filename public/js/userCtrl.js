@@ -3,9 +3,9 @@
     .controller('UserController', UserController)
     .directive('profileChart', profileChart)
 
-    UserController.$inject = ['user', 'auth', '$stateParams']
+    UserController.$inject = ['user', 'auth', '$stateParams', '$window']
 
-    function UserController(user, auth, $stateParams){
+    function UserController(user, auth, $stateParams, $window){
       var vm = this;
       vm.analyze = false
 
@@ -31,14 +31,18 @@
         })
       }
 
-      vm.show = function(){
-        vm.show = true
-        user.show($stateParams.id).success(function(results){
+      vm.display = function(){
+        vm.active = true
+        // console.log($window.localStorage.currentUser)
+        // console.log($stateParams.id)
+        user.display($window.localStorage.currentUser).success(function(results){
           vm.user = results
+          console.log(results)
         })
       }
 
       vm.edit = function(){
+          vm.active = true
           vm.editing = true
           vm.editingUser = {
             email: vm.email
@@ -46,15 +50,15 @@
         }
 
       vm.update = function(){
-        user.update($stateParams.id,  vm.editingUser).success(function(results){
+        user.update($window.localStorage.currentUser,  vm.editingUser).success(function(results){
           console.log(results)
           vm.editing = false
           vm.email = results.email
+          vm.user = results
         })
       }
 
       vm.removeMovie = function(film){
-        console.log(film)
         user.remove(film._id).success(function(results){
           var index = vm.userMovies.indexOf(film)
           vm.userMovies.splice(index,1)

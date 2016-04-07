@@ -1,37 +1,37 @@
-<!-- USER EDIT -->
-<button ng-click="user.display()" ng-show="!user.active">Show</button>
+<div class="container" ng-init="user.getUserMovies()">
+  <div class="row">
+    <h2 class="header-font center-align">Saved Films</h2>
+  </div>
 
-
-<div ng-show="!user.editing" ng-hide="!user.active">
-  <h5>{{user.user.email}}</h5>
-  <button ng-click="user.edit()">Edit</button>
-</div>
-
-<form ng-if="user.editing" ng-submit="user.update()">
-	<input ng-model="user.editingUser.email" type="text" placeholder="Email">
-	<button type="submit">Update User!</button>
-	<button ng-click="user.delete()" ui-sref="movie">Delete Account</button>
-</form>
-<!-- USER EDIT -->
 
 <!-- MOVIE INFO -->
-<div class="container" ng-init="user.getUserMovies()">
+<!-- <div class="container" ng-init="user.getUserMovies()">
   <div class="row">
     <div ng-repeat="film in user.userMovies" >{{film.title}}
       <br>
-      <img  ui-sref="dashboard({id: film.id})" ng-src="http://image.tmdb.org/t/p/w500{{film.poster}}" alt="" width="150px" height="200px" />
-      <button ng-click="user.removeMovie(film)">Delete Film</button>
+       <img ui-sref="dashboard({id: film.id})" ng-src="http://image.tmdb.org/t/p/w500{{film.poster}}" alt="" width="150px" height="200px"/>  <i class="medium material-icons" ng-click="user.removeMovie(film)">delete</i>
     </div>
    </div>
- </div>
+ </div> -->
+
+
+     <div class="row">
+       <div ng-repeat="film in user.userMovies" class="col s12 l4  center-align ">
+         <span class="header-font">{{film.title}}</span>
+            <img ui-sref="dashboard({id: film.id})" ng-src="http://image.tmdb.org/t/p/w500{{film.poster}}" class="responsive-img z-depth-3"/>  <i class="medium material-icons" ng-click="user.removeMovie(film)" style="color:#AB4A4A">delete</i>
+       </div>
+     </div>
+
+
+
+
+
 
  <button ng-click="user.analyze = true" ng-show="!user.analyze"> Compare Movies </button>
  <button ng-click="user.analyze = false" ng-show="user.analyze"> Done </button>
  <!-- MOVIE INFO -->
 
  <!-- D3 CHART -->
- <!-- <profile-chart id="profile" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} ng-if="user.budgets"></profile-chart> -->
-
 
  <div ng-show="user.analyze">
    <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></profile-chart>
@@ -40,7 +40,44 @@
 
   <!-- D3 CHART -->
   <a class="waves-effect waves-light btn" ng-click="user.getBarChart()">Get Bar Chart</a>
-  <!-- <button type="button" name="button" ng-click="user.getBarChart()">Get Bar Chart</button> -->
 <div>
   <canvas id="chartjs" tc-chartjs-bar chart-options="user.options" chart-data="user.data"></canvas>
 </div>
+
+
+<!-- USER EDIT -->
+<div class="row">
+    <a  class="waves-effect btn" ng-click="user.display()"  ng-show="!user.active" style="background-color:#632B2B">Account Information</a>
+    <div ng-show="!user.editing" ng-hide="!user.active" class="profile-info center-align">
+      <h2 class="center-align">Account Information</h2>
+      <h5 class="center-align"> Email: {{user.user.email}}</h5>
+        <a  class="waves-effect btn" ng-click="user.edit()" style="background-color:#AB4A4A">Edit</a>
+        <a  class="waves-effect btn" ng-click="user.active = false" style="background-color:#AB4A4A">Close</a>
+    </div>
+
+  <div ng-if="user.editing" class="profile-info center-align">
+    <form ng-if="user.editing" ng-submit="user.update()">
+      <input ng-model="user.editingUser.email" type="text" placeholder="Email">
+      <button type="submit" class="waves-effect btn" style="background-color:#AB4A4A">Update Account</button>
+      <button ng-click="user.delete()" class="waves-effect btn" style="background-color:#AB4A4A" ui-sref="movie">Delete Account</button>
+      <!-- <button type="submit">Update User!</button> -->
+      <!-- <button ng-click="user.delete()" ui-sref="movie">Delete Account</button> -->
+    </form>
+  </div>
+</div>
+<!-- USER EDIT -->
+
+<!-- <button ng-click="user.display()" ng-show="!user.active">Show</button> -->
+
+<!-- <div ng-show="!user.editing" ng-hide="!user.active">
+  <h5>{{user.user.email}}</h5>
+  <button ng-click="user.edit()">Edit</button>
+</div> -->
+
+<!-- <form ng-if="user.editing" ng-submit="user.update()">
+	<input ng-model="user.editingUser.email" type="text" placeholder="Email">
+	<button type="submit">Update User!</button>
+	<button ng-click="user.delete()" ui-sref="movie">Delete Account</button>
+</form> -->
+
+</div> <!-- End Container -->

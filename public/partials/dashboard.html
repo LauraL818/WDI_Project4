@@ -23,7 +23,7 @@
     </div><!-- End Col-->
 
     <div class="col s12 l4 center-align">
-      <img id="poster" ng-src="http://image.tmdb.org/t/p/w500{{info.movie.poster_path}}" alt="" height="250px" width="200px"/>
+      <img id="poster" ng-src="http://image.tmdb.org/t/p/w500{{info.movie.poster_path}}" class="z-depth-3"/>
       <h5> {{info.release}}</h5>
     </div><!-- End Col-->
 
@@ -84,7 +84,7 @@
   <div class="row">
     <h5 class="center-align header-font">Similar Titles</h5>
     <div class= "col l3 m6 s12 similar"  ng-repeat="similar in info.similarFilms" >
-      <img   ui-sref="dashboard({id: similar.id})" height="100%" width="100%"class="materialboxed" ng-src="http://image.tmdb.org/t/p/w500{{similar.poster_path}}">
+      <img class="z-depth-3"  ui-sref="dashboard({id: similar.id})" height="100%" width="100%"class="materialboxed" ng-src="http://image.tmdb.org/t/p/w500{{similar.poster_path}}">
     </div>
   </div>
 <!-- End Similar Titles -->

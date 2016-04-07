@@ -1,3 +1,7 @@
 body {
-  background-color: #CDCDD1;
+  background-color: #EBE5E5;
+}
+
+img {
+  box-shadow: 1px 1px 1px black;
 }

@@ -8,39 +8,28 @@
     function UserController(user, auth, $stateParams){
       var vm = this;
       vm.analyze = false
-      // function handleRequest(res){
-      //   var token = res.data ? res.data.token : null;
-      //   console.log(res);
-      //   if (token){
-      //     console.log('JWT:', token);
-      //   };
-      //   // Set user and user id based on user that is sent back
-      //   console.log(res.data)
-      //   if(res.data){
-      //     vm.message = res.data.message;
-      //     vm.user = res.data.user
-      //     vm.id = res.data.user._id
-      //   }
-      // }
-      //
-      // vm.login = function() {
-      //   user.login(vm.email, vm.password)
-      //     .then(handleRequest, handleRequest);
-      // }
-      //
-      // vm.register = function() {
-      //   user.register(vm.email, vm.password)
-      //     .then(handleRequest, handleRequest);
-      // }
-      //
-      // vm.logout = function() {
-      //   auth.logout && auth.logout();
-      //   vm.message = 'You are logout now';
-      // }
-      //
-      // vm.isAuthed = function() {
-      //   return auth.isAuthed ? auth.isAuthed() : false;
-      // }
+
+      vm.getUserMovies = function(){
+        user.movies().success(function(results){
+          vm.userMovies = results.movies
+          ///////////// DATA FOR D3 CHARTS ///////////////////////////
+          vm.revenues = []
+          vm.budgets = []
+          vm.revAdj = []
+          vm.revBud = []
+          vm.ratings = []
+          vm.titles = []
+          /////////// FOR LOOP TO GET DATA FOR D3 CHARTS/////////////
+          for(var i = 0; i<vm.userMovies.length; i++){
+            vm.revenues.push(vm.userMovies[i].revenue)
+            vm.budgets.push(vm.userMovies[i].budget)
+            vm.revAdj.push(vm.userMovies[i].revenue/10)
+            vm.revBud.push(vm.userMovies[i].budget/10)
+            vm.ratings.push(vm.userMovies[i].rating)
+            vm.titles.push(vm.userMovies[i].title)
+          }
+        })
+      }
 
       vm.show = function(){
         vm.show = true
@@ -64,24 +53,6 @@
         })
       }
 
-      vm.getUserMovies = function(){
-        user.movies().success(function(results){
-          vm.userMovies = results.movies
-          ///////////// DATA FOR D3 CHARTS ///////////////////////////
-          vm.revenues = []
-          vm.budgets = []
-          vm.ratings = []
-          vm.titles = []
-          /////////// FOR LOOP TO GET DATA FOR D3 CHARTS/////////////
-          for(var i = 0; i<vm.userMovies.length; i++){
-            vm.revenues.push(vm.userMovies[i].revenue)
-            vm.budgets.push(vm.userMovies[i].budget)
-            vm.ratings.push(vm.userMovies[i].rating)
-            vm.titles.push(vm.userMovies[i].title)
-          }
-        })
-      }
-
       vm.removeMovie = function(film){
         console.log(film)
         user.remove(film._id).success(function(results){
@@ -89,6 +60,64 @@
           vm.userMovies.splice(index,1)
         })
       }
+
+      vm.getBarChart = function(){
+        vm.data = {
+          labels: vm.titles,
+          datasets: [
+            {
+              label: 'Revenue',
+              fillColor: 'rgba(220,220,220,0.5)',
+              strokeColor: 'rgba(220,220,220,0.8)',
+              highlightFill: 'rgba(220,220,220,0.75)',
+              highlightStroke: 'rgba(220,220,220,1)',
+              data: vm.revAdj
+            },
+            {
+              label: 'Budget',
+              fillColor: 'rgba(151,187,205,0.5)',
+              strokeColor: 'rgba(151,187,205,0.8)',
+              highlightFill: 'rgba(151,187,205,0.75)',
+              highlightStroke: 'rgba(151,187,205,1)',
+              data: vm.revBud
+            }
+          ]
+        }
+
+        // Chart.js Options
+        vm.options =  {
+
+          // Sets the chart to be responsive
+          responsive: true,
+
+          //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+          scaleBeginAtZero : true,
+
+          //Boolean - Whether grid lines are shown across the chart
+          scaleShowGridLines : true,
+
+          //String - Colour of the grid lines
+          scaleGridLineColor : "rgba(0,0,0,.05)",
+
+          //Number - Width of the grid lines
+          scaleGridLineWidth : 1,
+
+          //Boolean - If there is a stroke on each bar
+          barShowStroke : true,
+
+          //Number - Pixel width of the bar stroke
+          barStrokeWidth : 2,
+
+          //Number - Spacing between each of the X value sets
+          barValueSpacing : 5,
+
+          //Number - Spacing between data sets within X values
+          barDatasetSpacing : 1,
+
+        }
+
+      }
+
     }
 
     function profileChart(){

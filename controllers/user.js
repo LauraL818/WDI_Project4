@@ -72,6 +72,7 @@ module.exports = {
   },
 
   delete: function(req,res){
+    console.log(req)
     User.findOneAndRemove({_id:req.params.id}, function(err){
       if(err) throw err
       res.json({message:'user deleted'})

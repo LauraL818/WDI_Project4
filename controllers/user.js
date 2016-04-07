@@ -34,7 +34,7 @@ module.exports = {
         expiresIn: 6000
       })
 
-      res.json({success: true, message: 'Successfully registered and here is  a token', token:token})
+      res.json({success: true, message: 'Successfully registered and here is  a token', token:token, user:newUser})
     })
   },
 

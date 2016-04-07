@@ -9,7 +9,6 @@
       var vm = this;
       vm.analyze = false
 
-
       vm.getUserMovies = function(){
         user.movies().success(function(results){
           vm.userMovies= null
@@ -74,24 +73,25 @@
       }
 
       vm.getBarChart = function(){
+        vm.analyze = true
         vm.getUserMovies()
         vm.data = {
           labels: vm.titles,
           datasets: [
             {
               label: 'Revenue',
-              fillColor: 'rgba(220,220,220,0.5)',
-              strokeColor: 'rgba(220,220,220,0.8)',
-              highlightFill: 'rgba(220,220,220,0.75)',
-              highlightStroke: 'rgba(220,220,220,1)',
+              fillColor: 'rgba(255,255,255,0.7)',
+              strokeColor: 'rgba(54,23,23,0.8)',
+              highlightFill: 'rgba(99,43,43,0.75)',
+              highlightStroke: 'rgba(54,23,23,1)',
               data: vm.revAdj
             },
             {
               label: 'Budget',
-              fillColor: 'rgba(151,187,205,0.5)',
-              strokeColor: 'rgba(151,187,205,0.8)',
-              highlightFill: 'rgba(151,187,205,0.75)',
-              highlightStroke: 'rgba(151,187,205,1)',
+              fillColor: 'rgba(99,43,43,0.7)',
+              strokeColor: 'rgba(54,23,23,0.8)',
+              highlightFill: 'rgba(255,255,255,0.75)',
+              highlightStroke: 'rgba(54,23,23,1)',
               data: vm.revBud
             }
           ]
@@ -222,9 +222,9 @@
                   .attr("r", function(d){
                     return rScale(d[0])
                   })
-                  .attr("fill", "grey")
+                  .attr("fill", "#E8A8A8")
                   .style("opacity", 1)
-                  .style('stroke', 'black')
+                  .style('stroke', '#632B2B')
                   .style('stroke-width', '3')
 
                 circles.on("mouseover", function(d) {

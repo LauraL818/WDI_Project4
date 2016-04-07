@@ -50,13 +50,11 @@
 </div>
 <!-- End Fill Gauge Graphs -->
 
-<div class="graphic">
+
+
   <div class="similar-films">
-    <div class="all" data-slug="films" data-size="35">
       <div class= "similar" ng-repeat="similar in info.similarFilms">
         <img  ui-sref="dashboard({id: similar.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{similar.poster_path}}" alt="" width="64px" height="150px" style='border:1px solid black' />
       </div>
-      </div>
-    </div>
   </div>
   <!-- <d3-graphic id="graphic" poster="{{info.similarPosters}}" ng-if="info.similarPosters"></d3-graphic> -->

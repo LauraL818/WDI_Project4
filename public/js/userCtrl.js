@@ -160,7 +160,7 @@
                 arr.push(title[i])
                 dataset.push(arr)
               }
-              console.log(dataset)
+
               ///////////////////////// END SCATTER PLOT //////////////////////
 
               //////////////////////// START D3 SCATTER PLOT /////////////////////
@@ -169,101 +169,201 @@
 
               var padding = 60
 
-              var svg = d3.select("#scatter")
-                          .append("svg")
-                          .attr("width", w)
-                          .attr("height", h)
+              console.log(scope.revenue)
+              
+              if(scope.revenue = ![]){
+                var svg = d3.select("#scatter")
+                            .append("svg")
+                            .attr("width", w)
+                            .attr("height", h)
 
-              var tooltip = d3.select("svg")
-                          .append("text")
-                          .attr("class", "tooltip")
-                          .style("opacity", 0)
-                          .style("text-anchor","end")
-                          .attr("startOffset","100%")
-                          .attr("fill", "black")
+                var tooltip = d3.select("svg")
+                            .append("text")
+                            .attr("class", "tooltip")
+                            .style("opacity", 0)
+                            .style("text-anchor","end")
+                            .attr("startOffset","100%")
+                            .attr("fill", "black")
 
-              var rScale = d3.scale.linear()
-                           .domain([0, d3.max(dataset, function(d) { return d[0] })])
-                           .range([2, 20]);
+                var rScale = d3.scale.linear()
+                             .domain([0, d3.max(dataset, function(d) { return d[0] })])
+                             .range([2, 20]);
 
-              var xScale = d3.scale.linear()
-                            .domain([0, d3.max(dataset, function(d){ return d[1] }) + 10])
-                            .range([padding, w - padding * 2])
+                var xScale = d3.scale.linear()
+                              .domain([0, d3.max(dataset, function(d){ return d[1] }) + 10])
+                              .range([padding, w - padding * 2])
 
-              var yScale = d3.scale.linear()
-                            .domain([0, d3.max(dataset, function(d){ return d[2] })])
-                            .range([h - padding, padding])
+                var yScale = d3.scale.linear()
+                              .domain([0, d3.max(dataset, function(d){ return d[2] })])
+                              .range([h - padding, padding])
 
-              var xAxis = d3.svg.axis()
-                  .scale(xScale)
-                  .orient("bottom")
-                  .ticks(8)
+                var xAxis = d3.svg.axis()
+                    .scale(xScale)
+                    .orient("bottom")
+                    .ticks(8)
 
-              var yAxis = d3.svg.axis()
-                  .scale(yScale)
-                  .orient("left")
-                  .ticks(8)
+                var yAxis = d3.svg.axis()
+                    .scale(yScale)
+                    .orient("left")
+                    .ticks(8)
 
 
-              var circles = svg.selectAll("circle")
-                .data(dataset)
-                .enter()
-                .append("circle")
-                .attr("cx", function(d){
-                  return xScale(d[1])
-                })
-                .attr("cy", function(d){
-                  return yScale(d[2])
-                })
-                .attr("r", function(d){
-                  return rScale(d[0])
-                })
-                .attr("fill", "grey")
-                .style("opacity", 1)
-                .style('stroke', 'black')
-                .style('stroke-width', '3')
-
-              circles.on("mouseover", function(d) {
-                      circles.style("opacity", .1)
-                      tooltip.transition()
-                          .duration(200)
-                          .style("opacity", 1);
-                      tooltip.text(d[3])
-                          .attr("x", xScale(d[1]))
-                          .attr("y", yScale(d[2]))
-
+                var circles = svg.selectAll("circle")
+                  .data(dataset)
+                  .enter()
+                  .append("circle")
+                  .attr("cx", function(d){
+                    return xScale(d[1])
                   })
-                .on("mouseout", function(d) {
-                     circles.style("opacity", 1)
-                     tooltip.transition()
-                         .duration(200)
-                         .style("opacity", 0);
-                 })
+                  .attr("cy", function(d){
+                    return yScale(d[2])
+                  })
+                  .attr("r", function(d){
+                    return rScale(d[0])
+                  })
+                  .attr("fill", "grey")
+                  .style("opacity", 1)
+                  .style('stroke', 'black')
+                  .style('stroke-width', '3')
 
-                  svg.append("text")
-                      .attr("class", "x label")
-                      .attr("text-anchor", "end")
-                      .attr("x", w/2)
-                      .attr("y", h - 6)
-                      .text("Budget")
+                circles.on("mouseover", function(d) {
+                        circles.style("opacity", .1)
+                        tooltip.transition()
+                            .duration(200)
+                            .style("opacity", 1);
+                        tooltip.text(d[3])
+                            .attr("x", xScale(d[1]))
+                            .attr("y", yScale(d[2]))
 
-                  svg.append("text")
-                     .attr("transform", "rotate(-90)")
-                     .attr("y", 0)
-                     .attr("x",0 - (h / 2))
-                     .attr("dy", "1em")
-                     .style("text-anchor", "middle")
-                     .text("Revenue");
+                    })
+                  .on("mouseout", function(d) {
+                       circles.style("opacity", 1)
+                       tooltip.transition()
+                           .duration(200)
+                           .style("opacity", 0);
+                   })
 
-                   svg.append("g")
-                     .attr("class", "axis")
-                     .attr("transform", "translate(0," + (h - padding) + ")")
-                     .call(xAxis)
+                    svg.append("text")
+                        .attr("class", "x label")
+                        .attr("text-anchor", "end")
+                        .attr("x", w/2)
+                        .attr("y", h - 6)
+                        .text("Budget")
 
-                   svg.append("g")
+                    svg.append("text")
+                       .attr("transform", "rotate(-90)")
+                       .attr("y", 0)
+                       .attr("x",0 - (h / 2))
+                       .attr("dy", "1em")
+                       .style("text-anchor", "middle")
+                       .text("Revenue");
+
+                     svg.append("g")
                        .attr("class", "axis")
-                       .attr("transform", "translate(" + padding + ",0)")
-                       .call(yAxis)
+                       .attr("transform", "translate(0," + (h - padding) + ")")
+                       .call(xAxis)
+
+                     svg.append("g")
+                         .attr("class", "axis")
+                         .attr("transform", "translate(" + padding + ",0)")
+                         .call(yAxis)
+
+              }
+              // var svg = d3.select("#scatter")
+              //             .append("svg")
+              //             .attr("width", w)
+              //             .attr("height", h)
+              //
+              // var tooltip = d3.select("svg")
+              //             .append("text")
+              //             .attr("class", "tooltip")
+              //             .style("opacity", 0)
+              //             .style("text-anchor","end")
+              //             .attr("startOffset","100%")
+              //             .attr("fill", "black")
+              //
+              // var rScale = d3.scale.linear()
+              //              .domain([0, d3.max(dataset, function(d) { return d[0] })])
+              //              .range([2, 20]);
+              //
+              // var xScale = d3.scale.linear()
+              //               .domain([0, d3.max(dataset, function(d){ return d[1] }) + 10])
+              //               .range([padding, w - padding * 2])
+              //
+              // var yScale = d3.scale.linear()
+              //               .domain([0, d3.max(dataset, function(d){ return d[2] })])
+              //               .range([h - padding, padding])
+              //
+              // var xAxis = d3.svg.axis()
+              //     .scale(xScale)
+              //     .orient("bottom")
+              //     .ticks(8)
+              //
+              // var yAxis = d3.svg.axis()
+              //     .scale(yScale)
+              //     .orient("left")
+              //     .ticks(8)
+              //
+              //
+              // var circles = svg.selectAll("circle")
+              //   .data(dataset)
+              //   .enter()
+              //   .append("circle")
+              //   .attr("cx", function(d){
+              //     return xScale(d[1])
+              //   })
+              //   .attr("cy", function(d){
+              //     return yScale(d[2])
+              //   })
+              //   .attr("r", function(d){
+              //     return rScale(d[0])
+              //   })
+              //   .attr("fill", "grey")
+              //   .style("opacity", 1)
+              //   .style('stroke', 'black')
+              //   .style('stroke-width', '3')
+              //
+              // circles.on("mouseover", function(d) {
+              //         circles.style("opacity", .1)
+              //         tooltip.transition()
+              //             .duration(200)
+              //             .style("opacity", 1);
+              //         tooltip.text(d[3])
+              //             .attr("x", xScale(d[1]))
+              //             .attr("y", yScale(d[2]))
+              //
+              //     })
+              //   .on("mouseout", function(d) {
+              //        circles.style("opacity", 1)
+              //        tooltip.transition()
+              //            .duration(200)
+              //            .style("opacity", 0);
+              //    })
+              //
+              //     svg.append("text")
+              //         .attr("class", "x label")
+              //         .attr("text-anchor", "end")
+              //         .attr("x", w/2)
+              //         .attr("y", h - 6)
+              //         .text("Budget")
+              //
+              //     svg.append("text")
+              //        .attr("transform", "rotate(-90)")
+              //        .attr("y", 0)
+              //        .attr("x",0 - (h / 2))
+              //        .attr("dy", "1em")
+              //        .style("text-anchor", "middle")
+              //        .text("Revenue");
+              //
+              //      svg.append("g")
+              //        .attr("class", "axis")
+              //        .attr("transform", "translate(0," + (h - padding) + ")")
+              //        .call(xAxis)
+              //
+              //      svg.append("g")
+              //          .attr("class", "axis")
+              //          .attr("transform", "translate(" + padding + ",0)")
+              //          .call(yAxis)
 
               //////////////////////// START D3 BAR CHART /////////////////////
                       var svg = d3.select("#profile")

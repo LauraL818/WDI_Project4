@@ -72,6 +72,7 @@
       }
 
       vm.getBarChart = function(){
+
         vm.data = {
           labels: vm.titles,
           datasets: [
@@ -105,6 +106,24 @@
           barValueSpacing : 5,
           barDatasetSpacing : 1
         }
+
+        var ctx1 = $("#chartjs").get(0).getContext("2d");
+        var myBarChart1 = new Chart(ctx1).Bar(vm.data, vm.options);
+
+        var ctx2 = $("#chartjs").get(0).getContext("2d");
+        var myBarChart2;
+
+        // myBarChart1.destroy();
+        // myBarChart2 = new Chart(ctx1).Bar(vm.data, vm.options);
+        // $('#chartjs').on('shown.bs.tab', function (e) {
+        //     myLineChart2.destroy();
+        //     myLineChart1 = new Chart(ctx1).Line(data, line_chart_options);
+        // });
+        //
+        // $('#tab2').on('shown.bs.tab', function (e) {
+        //     myLineChart1.destroy();
+        //     myLineChart2 = new Chart(ctx2).Line(data, line_chart_options);
+        // });
       }
     }
 
@@ -285,6 +304,7 @@
       }
       return directive
     }
+
 
 
 

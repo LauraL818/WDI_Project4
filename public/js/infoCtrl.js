@@ -37,18 +37,18 @@
           datasets: [
             {
               label: 'Revenue',
-              fillColor: 'rgba(220,220,220,0.5)',
-              strokeColor: 'rgba(220,220,220,0.8)',
-              highlightFill: 'rgba(220,220,220,0.75)',
-              highlightStroke: 'rgba(220,220,220,1)',
+              fillColor: 'rgba(255,255,255,0.7)',
+              strokeColor: 'rgba(54,23,23,0.8)',
+              highlightFill: 'rgba(99,43,43,0.75)',
+              highlightStroke: 'rgba(225,225,225,1)',
               data: [vm.revenue]
             },
             {
               label: 'Budget',
-              fillColor: 'rgba(151,187,205,0.5)',
-              strokeColor: 'rgba(151,187,205,0.8)',
-              highlightFill: 'rgba(151,187,205,0.75)',
-              highlightStroke: 'rgba(151,187,205,1)',
+              fillColor: 'rgba(99,43,43,0.7)',
+              strokeColor: 'rgba(54,23,23,0.8)',
+              highlightFill: 'rgba(255,255,255,0.75)',
+              highlightStroke: 'rgba(54,23,23,1)',
               data: [vm.budget]
             }
           ]
@@ -58,8 +58,9 @@
           responsive: true,
           scaleBeginAtZero : true,
           scaleShowGridLines : true,
-          scaleGridLineColor : "rgba(0,0,0,.05)",
+          scaleGridLineColor : "rgba(255,255,255,0.5)",
           scaleGridLineWidth : 1,
+          scaleFontColor: "white",
           barShowStroke : true,
           barStrokeWidth : 2,
           barValueSpacing : 5,
@@ -106,10 +107,10 @@
                            .append("svg")
                            .attr("id", "fillgauge1")
                 var config = liquidFillGaugeDefaultSettings();
-                config.circleColor = "blue";
-                config.textColor = "white";
-                config.waveTextColor = "white";
-                config.waveColor = "blue";
+                config.circleColor = "#AB4A4A";
+                config.textColor = "black";
+                config.waveTextColor = "black";
+                config.waveColor = "#AB4A4A";
                 config.circleThickness = 0.1;
                 config.circleFillGap = 0.2;
                 config.textVertPosition = 0.8;
@@ -126,11 +127,11 @@
                             .append("svg")
                             .attr("id", "fillgauge2")
                  var config1 = newMax();
-                  config1.circleColor = "#FF7777";
-                  config1.textColor = "#FF4444";
-                  config1.waveTextColor = "#FFAAAA";
-                  config1.waveColor = "#FFDDDD";
-                  config1.circleThickness = 0.2;
+                  config1.circleColor = "#AB4A4A";
+                  config1.textColor = "black";
+                  config1.waveTextColor = "#DBDAD8";
+                  config1.waveColor = "#AB4A4A";
+                  config1.circleThickness = 0.1;
                   config1.textVertPosition = 0.2;
                   config1.waveAnimateTime = 1000;
                   var gauge2= loadLiquidFillGauge("fillgauge2", data, config1);
@@ -144,10 +145,10 @@
                             .append("svg")
                             .attr("id", "fillgauge3")
                  var config2 = liquidFillGaugeDefaultSettings();
-                  config2.circleColor = "blue";
-                  config2.textColor = "#553300";
-                  config2.waveTextColor = "#805615";
-                  config2.waveColor = "blue";
+                  config2.circleColor = "#AB4A4A";
+                  config2.textColor = "black";
+                  config2.waveTextColor = "black";
+                  config2.waveColor = "#AB4A4A";
                   config2.circleThickness = 0.1;
                   config2.circleFillGap = 0.2;
                   config2.textVertPosition = 0.8;

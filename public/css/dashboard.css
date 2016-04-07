@@ -2,3 +2,7 @@
   height: 100%;
   width: 90%;
 }
+
+canvas {
+  padding: 10px;
+}

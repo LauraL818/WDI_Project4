@@ -9,6 +9,7 @@
 
     <link href="./css/d3.css" rel="stylesheet">
     <link href="./css/dashboard.css" rel="stylesheet">
+    <link href="./css/nav.css" rel="stylesheet">
 
     <!-- D3 -->
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -35,14 +36,15 @@
     <script src="./js/infoCtrl.js"></script>
     <script src="./js/liquidFillGauge.js"></script>
 
+
   </head>
   <body ng-app="allMovies" ng-controller="GlobalController as global">
 
     <div class="navbar-fixed">
-    <nav>
+    <nav style="background-color:#AB4A4A">
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a ui-sref="movie"> Movies </a></li>
           <li ng-if="!global.isAuthed()"><a ui-sref="signup"> Sign Up </a></li>
           <li ng-if="global.isAuthed()"><a ui-sref="profile({id: global.user._id})"> Profile </a></li>

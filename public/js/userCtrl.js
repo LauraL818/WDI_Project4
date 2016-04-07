@@ -51,10 +51,16 @@
 
       vm.update = function(){
         user.update($window.localStorage.currentUser,  vm.editingUser).success(function(results){
-          console.log(results)
           vm.editing = false
           vm.email = results.email
           vm.user = results
+        })
+      }
+
+      vm.delete = function(){
+        user.delete($window.localStorage.currentUser).success(function(results){
+          $window.localStorage.removeItem('currentUser')
+          $window.localStorage.removeItem('jwtToken')
         })
       }
 

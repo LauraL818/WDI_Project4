@@ -10,6 +10,7 @@
 <form ng-if="user.editing" ng-submit="user.update()">
 	<input ng-model="user.editingUser.email" type="text" placeholder="Email">
 	<button type="submit">Update User!</button>
+	<button ng-click="user.delete()" ui-sref="movie">Delete Account</button>
 </form>
 <!-- USER EDIT -->
 

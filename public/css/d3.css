@@ -13,7 +13,7 @@
   display: inline-block;
 }
 
-/*#chartjs {
-  width: 800px;
-  height: 400px;
-}*/
+#bar {
+  height: 300px;
+  width:300px;
+}

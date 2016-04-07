@@ -12,6 +12,7 @@
       vm.getDetails = function(){
         movieService.show($stateParams.id).success(function(results){
           ///////// DECLARE VARIABLES TO BE SENT TO BACK END TO CREATE MOVIE MODEL////////////////
+
           vm.main = false
           vm.overview = false
           vm.movie = results
@@ -25,12 +26,14 @@
           vm.title = results.title
           vm.runtime = results.runtime
           vm.id = results.id
+          vm.company = results.production_companies[0].name
         })
       }
 
       vm.showBar = function(){
+        vm.bar = true
         vm.data = {
-          labels: [vm.title],
+          labels: [""],
           datasets: [
             {
               label: 'Revenue',

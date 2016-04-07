@@ -21,7 +21,7 @@
       })
     }
 
-    vm.show = function(id){
+    vm.display = function(id){
       return $http.get('/users/' + id)
     }
 

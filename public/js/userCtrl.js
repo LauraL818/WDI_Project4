@@ -170,8 +170,7 @@
               var padding = 60
 
               console.log(scope.revenue)
-              
-              if(scope.revenue = ![]){
+
                 var svg = d3.select("#scatter")
                             .append("svg")
                             .attr("width", w)
@@ -268,7 +267,6 @@
                          .attr("transform", "translate(" + padding + ",0)")
                          .call(yAxis)
 
-              }
               // var svg = d3.select("#scatter")
               //             .append("svg")
               //             .attr("width", w)

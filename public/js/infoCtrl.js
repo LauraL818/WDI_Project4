@@ -28,6 +28,46 @@
         })
       }
 
+      vm.showBar = function(){
+        vm.data = {
+          labels: [vm.title],
+          datasets: [
+            {
+              label: 'Revenue',
+              fillColor: 'rgba(220,220,220,0.5)',
+              strokeColor: 'rgba(220,220,220,0.8)',
+              highlightFill: 'rgba(220,220,220,0.75)',
+              highlightStroke: 'rgba(220,220,220,1)',
+              data: [vm.revenue]
+            },
+            {
+              label: 'Budget',
+              fillColor: 'rgba(151,187,205,0.5)',
+              strokeColor: 'rgba(151,187,205,0.8)',
+              highlightFill: 'rgba(151,187,205,0.75)',
+              highlightStroke: 'rgba(151,187,205,1)',
+              data: [vm.budget]
+            }
+          ]
+        }
+
+        vm.options =  {
+          responsive: true,
+          scaleBeginAtZero : true,
+          scaleShowGridLines : true,
+          scaleGridLineColor : "rgba(0,0,0,.05)",
+          scaleGridLineWidth : 1,
+          barShowStroke : true,
+          barStrokeWidth : 2,
+          barValueSpacing : 5,
+          barDatasetSpacing : 1
+        }
+
+        var ctx = document.querySelector("#bar").getContext("2d")
+        var barChart = new Chart(ctx).Bar(vm.data, vm.options)
+
+      }
+
       vm.addMovie = function(){
         movieService.add({title:vm.title, release:vm.release, poster: vm.poster,overview: vm.details,revenue:vm.revenue,budget: vm.budget,rating: vm.rating,runtime: vm.runtime, id: vm.id}).success(function(results){
           console.log(results)

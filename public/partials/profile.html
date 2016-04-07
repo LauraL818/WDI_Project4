@@ -36,10 +36,11 @@
  <div ng-show="user.analyze">
    <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></profile-chart>
  </div>
+
+
   <!-- D3 CHART -->
   <a class="waves-effect waves-light btn" ng-click="user.getBarChart()">Get Bar Chart</a>
   <!-- <button type="button" name="button" ng-click="user.getBarChart()">Get Bar Chart</button> -->
 <div>
   <canvas id="chartjs" tc-chartjs-bar chart-options="user.options" chart-data="user.data"></canvas>
-  <!-- <canvas id="newChart" tc-chartjs-bar chart-options="user.options" chart-data="user.data"></canvas> -->
 </div>

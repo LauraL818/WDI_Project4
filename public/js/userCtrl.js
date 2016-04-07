@@ -9,16 +9,18 @@
       var vm = this;
       vm.analyze = false
 
+
       vm.getUserMovies = function(){
         user.movies().success(function(results){
-          vm.userMovies = results.movies
-          ///////////// DATA FOR D3 CHARTS ///////////////////////////
+          vm.userMovies= null
           vm.revenues = []
           vm.budgets = []
           vm.revAdj = []
           vm.revBud = []
           vm.ratings = []
           vm.titles = []
+          vm.userMovies = results.movies
+
           /////////// FOR LOOP TO GET DATA FOR D3 CHARTS/////////////
           for(var i = 0; i<vm.userMovies.length; i++){
             vm.revenues.push(vm.userMovies[i].revenue)
@@ -72,7 +74,7 @@
       }
 
       vm.getBarChart = function(){
-
+        vm.getUserMovies()
         vm.data = {
           labels: vm.titles,
           datasets: [
@@ -107,8 +109,8 @@
           barDatasetSpacing : 1
         }
 
-        var ctx1 = $("#chartjs").get(0).getContext("2d");
-        var myBarChart1 = new Chart(ctx1).Bar(vm.data, vm.options);
+        var ctx1 = document.querySelector("#chartjs").getContext("2d")
+        var myBarChart1 = new Chart(ctx1).Bar(vm.data, vm.options)
 
       }
     }

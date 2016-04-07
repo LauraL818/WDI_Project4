@@ -36,6 +36,11 @@
 </div>
 <!-- End Fill Gauge Graphs -->
 
+  <a class="waves-effect waves-light btn" ng-click="info.showBar()">Show Rev vs. Budget</a>
+<div>
+  <canvas id="bar" tc-chartjs-bar chart-options="info.options" chart-data="info.data"></canvas>
+</div>
+
   <div class="similar-films">
       <div class= "similar" ng-repeat="similar in info.similarFilms">
         <img  ui-sref="dashboard({id: similar.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{similar.poster_path}}" alt="" width="64px" height="150px" style='border:1px solid black' />

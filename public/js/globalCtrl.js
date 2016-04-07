@@ -15,10 +15,10 @@
         if (token){
           console.log('JWT:', token);
         }
-        if(res.data.user){
+          console.log(res)
           $window.localStorage['currentUser'] = res.data.user._id
           vm.user = res.data.user
-          }
+
       }
 
       vm.login = function() {
@@ -29,7 +29,7 @@
 
       vm.register = function() {
         user.register(vm.registerUser.email, vm.registerUser.password)
-          .then(handleRequest, handleRequest);
+          .then(handleRequest, handleRequest)
       }
 
       vm.logout = function() {

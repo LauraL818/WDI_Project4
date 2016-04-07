@@ -29,26 +29,8 @@
     $urlRouterProvider.otherwise('/')
 
     $stateProvider
-      .state('home', {
-        url:'/',
-        templateUrl:'partials/home.html'
-      })
-      .state('login', {
-        url:'/login',
-        templateUrl:'partials/login.html'
-      })
-      .state('signup', {
-        url:'/signup',
-        templateUrl:'partials/signup.html',
-        controller:'UserController as user'
-      })
-      .state('profile', {
-        url:'/users/:id',
-        templateUrl:'partials/profile.html',
-        controller:'UserController as user'
-      })
       .state('movie', {
-        url:'/movie',
+        url:'/',
         templateUrl:'partials/movie.html',
         controller:'MovieController as movies'
       })
@@ -56,6 +38,19 @@
         url:'/movie/:id',
         templateUrl:'partials/dashboard.html',
         controller:'InfoController as info'
+      })
+      .state('login', {
+        url:'/login',
+        templateUrl:'partials/login.html'
+      })
+      .state('signup', {
+        url:'/signup',
+        templateUrl:'partials/signup.html'
+      })
+      .state('profile', {
+        url:'/users/:id',
+        templateUrl:'partials/profile.html',
+        controller:'UserController as user'
       })
 
     }

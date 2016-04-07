@@ -15,7 +15,7 @@
 </div> -->
 
 <!-- Basic Movie Facts-->
-<h3 ng-init="info.getDetails()" ng-model="info.title">{{info.movie.title}}</h3>
+<h3 ng-init="info.getDetails(); info.findSimilar()" ng-model="info.title">{{info.movie.title}}</h3>
 <img ng-src="http://image.tmdb.org/t/p/w500{{info.movie.poster_path}}" alt="" height="250px" width="200px"/>
 <h5>{{info.release}}</h5>
 <!--End Basic Movie Facts-->
@@ -57,6 +57,11 @@
 <div class="graphic">
   <div class="similar-films">
     <div class="collection" data-slug="films" data-size="35">
+      <div ng-repeat="similar in info.similarFilms">
+        {{similar.title}}
+        <br>
+        <img  ui-sref="dashboard({id: similar.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{similar.poster_path}}" alt="" width="150px" height="200px" />
+      </div>
       </div>
     </div>
   </div>

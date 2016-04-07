@@ -15,9 +15,7 @@
         if (token){
           console.log('JWT:', token);
         }
-
           vm.user = res.data.user
-
       }
 
       vm.login = function() {

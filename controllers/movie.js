@@ -19,7 +19,7 @@ module.exports = {
   })
 },
   similar: function(req,res){
-    MovieDB.movieSimilar({id:555}, function(err,response){
+    MovieDB.movieSimilar({id:req.params.id}, function(err,response){
       res.json(response)
     })
   }

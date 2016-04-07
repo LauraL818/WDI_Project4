@@ -34,6 +34,13 @@
           console.log(results)
         })
       }
+
+      vm.findSimilar = function(){
+        movieService.similar($stateParams.id).success(function(results){
+          vm.similarFilms = results.results
+          // console.log(results.results)
+        })
+      }
     }
 
     function d3Chart(){

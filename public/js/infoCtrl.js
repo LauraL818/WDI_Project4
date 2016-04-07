@@ -2,6 +2,7 @@
   angular.module('allMovies')
     .controller('InfoController', InfoController)
     .directive('d3Chart', d3Chart)
+    // .directive('d3Graphic', d3Graphic)
 
 
     InfoController.$inject = ['movieService', '$stateParams']
@@ -25,7 +26,6 @@
           vm.title = results.title
           vm.runtime = results.runtime
           vm.id = results.id
-
         })
       }
 
@@ -107,5 +107,19 @@
       }
       return directive
     }
+
+    // function d3Graphic(){
+    //   var directive = {
+    //     restrict:'EA',
+    //       scope: {
+    //         revenue: '@',
+    //         rating:'@',
+    //         budget:'@'
+    //       },
+    //       link: function(scope,el){
+    //
+    //       }
+    //   }
+    // }
 
 })()

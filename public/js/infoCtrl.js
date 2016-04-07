@@ -25,13 +25,24 @@
           vm.title = results.title
           vm.runtime = results.runtime
           vm.id = results.id
-
         })
       }
 
       vm.addMovie = function(){
         movieService.add({title:vm.title, release:vm.release, poster: vm.poster,overview: vm.details,revenue:vm.revenue,budget: vm.budget,rating: vm.rating,runtime: vm.runtime, id: vm.id}).success(function(results){
           console.log(results)
+        })
+      }
+
+      vm.findSimilar = function(){
+        movieService.similar($stateParams.id).success(function(results){
+          vm.similarFilms = results.results
+          vm.similarPosters = results.results
+          vm.similarPosters = []
+
+          for(var i=0; i < vm.similarFilms.length; i++){
+            vm.similarPosters.push(vm.similarFilms[i].poster_path)
+          }
         })
       }
     }
@@ -107,5 +118,55 @@
       }
       return directive
     }
+
+//     function d3Graphic(){
+//       var directive = {
+//         restrict:'EA',
+//           scope: {
+//             poster: '@'
+//           },
+//           link: function(scope,el){
+//
+//             var p = scope.poster.replace(/((\[)|(\]))/g,"").split(",")
+//             var poster = []
+//             for(var i=0; i < p.length; i++){
+//               var post = p[i].replace(/["']/g, "")
+//               poster.push("http://image.tmdb.org/t/p/w500"+ post +"")
+//             }
+//
+//             console.log(poster)
+//
+//
+//             var w = 1200
+//             var h = 450
+//             var width = 60
+//             var height = 100
+//
+//             // var fisheye = d3.fisheye.circular()
+//             //               .radius(200)
+//             //               .distortion(2);
+//
+//             var svg = d3.select("#graphic")
+//                           .append("svg")
+//                           .attr("width", w)
+//                           .attr("height", h)
+//                           .style("border", "1px solid black");
+//
+//               svg.selectAll("image")
+//                   .data(poster)
+//                   .enter()
+//                   .append("image")
+//                   .attr("xlink:href", function(d){ return d})
+//                   .attr("x", function(d, i){ return i + '30px'})
+//                   .attr("y", "60")
+//                   .attr("width", width)
+//                   .attr("height", height)
+//
+//
+//
+//       }
+//   }
+//     return directive
+// }
 
 })()

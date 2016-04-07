@@ -9,7 +9,8 @@
         index: index,
         show: show,
         find: find,
-        add: add
+        add: add,
+        similar: similar
       }
       return service
 
@@ -27,6 +28,10 @@
 
       function add(data){
         return $http.post('/users/addMovies', data)
+      }
+
+      function similar(id){
+        return $http.post('/movies/' + id + '/similar')
       }
 
     }

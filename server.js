@@ -18,8 +18,8 @@ var
   config = require('./config.js'),
   User = require('./models/User.js')
   // dotenv = require('dotenv').load({silent:true})
-
-var db = process.env.MLAB_DB_URL || config.database
+// process.env.MLAB_DB_URL || 
+var db = config.database
 
 mongoose.connect(db, function(err){
   if (err) return console.log(err)
@@ -40,11 +40,6 @@ app.use('/movies', movieRoutes)
 
 // User Routes
 app.use('/auth', authRoutes)
-
-// Root Path
-app.get('*', function(req,res){
-  res.sendFile(__dirname + '/public/index.html')
-})
 
 // route middleware to verify token
 app.use(function(req, res, next){
@@ -70,6 +65,11 @@ app.use(function(req, res, next){
 
 // User Routes
 app.use('/users', userRoutes)
+
+// Root Path
+app.get('*', function(req,res){
+  res.sendFile(__dirname + '/public/index.html')
+})
 
 var PORT = process.env.PORT || 3000
 app.listen(PORT, function(){

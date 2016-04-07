@@ -17,6 +17,11 @@ module.exports = {
     MovieDB.searchMovie(req.body, function(err, response){
       res.json(response)
   })
-}
+},
+  similar: function(req,res){
+    MovieDB.movieSimilar({id:req.params.id}, function(err,response){
+      res.json(response)
+    })
+  }
 
 }

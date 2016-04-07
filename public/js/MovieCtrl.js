@@ -20,6 +20,7 @@
         movieService.find(vm.searchField).success(function(results){
           vm.searchResults = results.results
         })
-      }
+      }  
     }
+
 })()

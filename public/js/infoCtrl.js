@@ -108,8 +108,8 @@
                            .attr("id", "fillgauge1")
                 var config = liquidFillGaugeDefaultSettings();
                 config.circleColor = "#AB4A4A";
-                config.textColor = "black";
-                config.waveTextColor = "black";
+                config.textColor = "#361717";
+                config.waveTextColor = "#361717";
                 config.waveColor = "#AB4A4A";
                 config.circleThickness = 0.1;
                 config.circleFillGap = 0.2;
@@ -146,8 +146,8 @@
                             .attr("id", "fillgauge3")
                  var config2 = liquidFillGaugeDefaultSettings();
                   config2.circleColor = "#AB4A4A";
-                  config2.textColor = "black";
-                  config2.waveTextColor = "black";
+                  config2.textColor = "#361717";
+                  config2.waveTextColor = "#361717";
                   config2.waveColor = "#AB4A4A";
                   config2.circleThickness = 0.1;
                   config2.circleFillGap = 0.2;

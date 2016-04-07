@@ -42,26 +42,26 @@ app.use('/movies', movieRoutes)
 app.use('/auth', authRoutes)
 
 // route middleware to verify token
-app.use(function(req, res, next){
-  var token = req.body.token || req.query.token || req.headers['x-access-token']
-  if (!token){
-    res.json({
-      success: false,
-      message: 'You need a token to enter'})
-  } else {
-    jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-      if (err){
-        return res.json({
-          success: false,
-          message: 'Incorrect Token'
-        });
-      } else {
-        req.decoded = decoded;
-        next()
-      }
-    })
-  }
-})
+// app.use(function(req, res, next){
+//   var token = req.body.token || req.query.token || req.headers['x-access-token']
+//   if (!token){
+//     res.json({
+//       success: false,
+//       message: 'You need a token to enter'})
+//   } else {
+//     jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+//       if (err){
+//         return res.json({
+//           success: false,
+//           message: 'Incorrect Token'
+//         });
+//       } else {
+//         req.decoded = decoded;
+//         next()
+//       }
+//     })
+//   }
+// })
 
 // User Routes
 app.use('/users', userRoutes)

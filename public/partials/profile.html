@@ -1,17 +1,3 @@
-  <!-- <div class="navbar-fixed" ng-init="user.getUserMovies()">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#!" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a ui-sref="home"> Home </a></li>
-        <li><a ui-sref="movie"> Movies </a></li>
-        <li><a ui-sref="profile"> Profile</a></li>
-        <li ng-click="user.logout()"><a ui-sref="home"> Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-  </div> -->
-
 <!-- USER EDIT -->
 <button ng-click="user.show(); user.show = false">Show</button>
 
@@ -45,7 +31,11 @@
  <!-- D3 CHART -->
  <!-- <profile-chart id="profile" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} ng-if="user.budgets"></profile-chart> -->
 
+
  <div ng-show="user.analyze">
    <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></profile-chart>
  </div>
   <!-- D3 CHART -->
+  <a class="waves-effect waves-light btn" ng-click="user.getBarChart()">Get Bar Chart</a>
+  <!-- <button type="button" name="button" ng-click="user.getBarChart()">Get Bar Chart</button> -->
+  <canvas id="chartjs" tc-chartjs-bar chart-options="user.options" chart-data="user.data"></canvas>

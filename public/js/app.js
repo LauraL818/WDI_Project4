@@ -1,5 +1,5 @@
 (function(){
-  angular.module('allMovies', ['ui.router'])
+  angular.module('allMovies', ['ui.router','tc.chartjs'])
       .config(['$stateProvider', '$urlRouterProvider', mainRouter])
       .factory('authInterceptor', authInterceptor)
       .config(function($httpProvider){
@@ -57,5 +57,6 @@
         templateUrl:'partials/dashboard.html',
         controller:'InfoController as info'
       })
+
     }
 })()

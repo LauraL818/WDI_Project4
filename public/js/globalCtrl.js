@@ -2,9 +2,9 @@
   angular.module('allMovies')
     .controller('GlobalController', GlobalController)
 
-    GlobalController.$inject = ['user', 'auth']
+    GlobalController.$inject = ['user', 'auth','$state', '$window']
 
-    function GlobalController(user,auth){
+    function GlobalController(user,auth,$state, $window){
       var vm = this;
 
       vm.loginUser = {}
@@ -15,12 +15,14 @@
         if (token){
           console.log('JWT:', token);
         }
+          $window.localStorage['currentUser'] = res.data.user._id
           vm.user = res.data.user
       }
 
       vm.login = function() {
         user.login(vm.loginUser.email, vm.loginUser.password)
-          .then(handleRequest, handleRequest);
+          .then(handleRequest, handleRequest)
+          $state.go('movie')
       }
 
       vm.register = function() {
@@ -30,12 +32,13 @@
 
       vm.logout = function() {
         auth.logout && auth.logout();
-        vm.message = 'You are logout now';
+        $window.localStorage.removeItem('currentUser')
       }
 
       vm.isAuthed = function() {
         return auth.isAuthed ? auth.isAuthed() : false;
       }
+
     }
 
 })()

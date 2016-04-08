@@ -2,14 +2,15 @@
 <div class="container">
   <div class="row">
     <div class="col s12 m7 l7 offset-l2 offset-m2">
-          <h1 class="header-font center-align" ng-show="!movies.searches">Now Playing</h1>
+      <h1 class="header-font center-align" ng-show="!movies.searches">Now Playing</h1>
+      <h1 class="header-font center-align" ng-show="movies.searches">Search Results</h1>
     </div> <!-- End Col -->
     <div class="col s12 m3 l3">
       <form ng-submit="movies.findMovie()" ng-init="movies.getMovies()">
        <div class="input-field">
          <input ng-model="movies.searchField" id="search" type="search" required>
          <label for="search"><i class="material-icons">search</i></label>
-         <button type="submit" ng-click="movies.searches = true">Search</button>
+         <button type="submit" ng-click="movies.searches = true" style="background-color:#632B2B; color:#EBE5E5" class="waves-effect btn">Search</button>
        </div>
       </form>
     </div> <!-- End Col -->
@@ -30,10 +31,7 @@
 
 <!-- Search Results-->
   <div class="collection" ng-show="movies.searches">
-      <h2 class="header-font center-align" ng-show="movies.searches">Search Results</h2>
+
        <a href="#!" id="search-results" class="collection-item" ng-repeat="result in movies.searchResults" ui-sref="dashboard({id: result.id})"><span ng-click="movies.searches = false" ui-sref="dashboard({id: result.id})">{{result.title}}</a>
     </div>
- <!-- <ul ng-show="movies.searches">
-   <li ng-repeat="result in movies.searchResults"><span ng-click="movies.searches = false" ui-sref="dashboard({id: result.id})" >{{result.title}}</span></li>
- </ul> -->
  <!-- Search Results -->

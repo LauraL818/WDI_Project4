@@ -14,8 +14,8 @@
           vm.userMovies= null
           vm.revenues = []
           vm.budgets = []
-          vm.revAdj = []
-          vm.revBud = []
+          // vm.revAdj = []
+          // vm.revBud = []
           vm.ratings = []
           vm.titles = []
           vm.userMovies = results.movies
@@ -24,8 +24,8 @@
           for(var i = 0; i<vm.userMovies.length; i++){
             vm.revenues.push(vm.userMovies[i].revenue)
             vm.budgets.push(vm.userMovies[i].budget)
-            vm.revAdj.push(vm.userMovies[i].revenue/10)
-            vm.revBud.push(vm.userMovies[i].budget/10)
+            // vm.revAdj.push(vm.userMovies[i].revenue)
+            // vm.revBud.push(vm.userMovies[i].budget)
             vm.ratings.push(vm.userMovies[i].rating)
             vm.titles.push(vm.userMovies[i].title)
           }
@@ -84,7 +84,7 @@
               strokeColor: 'rgba(54,23,23,0.8)',
               highlightFill: 'rgba(99,43,43,0.75)',
               highlightStroke: 'rgba(54,23,23,1)',
-              data: vm.revAdj
+              data: vm.revenues
             },
             {
               label: 'Budget',
@@ -92,7 +92,7 @@
               strokeColor: 'rgba(54,23,23,0.8)',
               highlightFill: 'rgba(255,255,255,0.75)',
               highlightStroke: 'rgba(54,23,23,1)',
-              data: vm.revBud
+              data: vm.budgets
             }
           ]
         }

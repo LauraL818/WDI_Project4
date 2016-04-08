@@ -1,0 +1,14 @@
+.user-main {
+  /*background-color: blue;*/
+  background-image: url('../images/film.png');
+  background-position: top ;
+  background-size: cover;
+  height: 500px;
+  margin-top: 8%;
+}
+
+.user-info {
+  opacity: .9;
+  margin-top: 24%;
+  color: white;
+}

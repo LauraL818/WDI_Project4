@@ -1,5 +1,18 @@
-<input type="text" ng-model="global.registerUser.email" placeholder="email"><br>
+<!-- <input type="text" ng-model="global.registerUser.email" placeholder="email"><br>
 <input type="password" ng-model="global.registerUser.password" placeholder="password"><br>
-<br>
+<br> -->
 
-<button ng-click="global.register()">Register</button>
+<!-- <button ng-click="global.register()">Register</button> -->
+
+<div class="container user-main">
+  <div class="row">
+    <div class="col s6 offset-s3 user-info">
+      <input type="text" ng-model="global.registerUser.email" placeholder="email"><br>
+      <input type="password" ng-model="global.registerUser.password" placeholder="password"><br>
+    </div>
+  </div>
+
+  <div class="row center-align">
+      <button ng-click="global.register()" style="color:#632B2B; background-color:#EBE5E5" class="waves-effect btn">Register</button>
+  </div>
+</div>

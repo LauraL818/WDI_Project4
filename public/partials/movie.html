@@ -1,37 +1,39 @@
-<!-- <div class="navbar-fixed"  ng-init="movies.getMovies()">
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#!" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a ui-sref="home"> Home </a></li>
-        <li><a ui-sref="movie"> Movies </a></li>
-        <li><a ui-sref="profile"> Profile</a></li>
-        <li ng-click="user.logout()"><a ui-sref="home">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-</div> -->
+<!-- Title + Search Bar -->
+<div class="container">
+  <div class="row">
+    <div class="col s12 m7 l7 offset-l2 offset-m2">
+          <h1 class="header-font center-align" ng-show="!movies.searches">Now Playing</h1>
+    </div> <!-- End Col -->
+    <div class="col s12 m3 l3">
+      <form ng-submit="movies.findMovie()" ng-init="movies.getMovies()">
+       <div class="input-field">
+         <input ng-model="movies.searchField" id="search" type="search" required>
+         <label for="search"><i class="material-icons">search</i></label>
+         <button type="submit" ng-click="movies.searches = true">Search</button>
+       </div>
+      </form>
+    </div> <!-- End Col -->
+  </div> <!-- End Row -->
+</div>  <!-- End Container -->
+<!-- Title + Search Bar -->
 
-<h1>Movie</h1>
-
-<form ng-submit="movies.findMovie()" ng-init="movies.getMovies()">
- <div class="input-field">
-   <input ng-model="movies.searchField" id="search" type="search" required>
-   <label for="search"><i class="material-icons">search</i></label>
-   <i class="material-icons">close</i>
-   <button type="submit" ng-click="movies.searches = true">Search</button>
- </div>
-</form>
-
+<!-- Recent Movies -->
 <div class="container" ng-hide="movies.searches">
   <div class="row">
-    <div ng-repeat="r in movies.recent">{{r.title}}
-      <br>
-      <img  ui-sref="dashboard({id: r.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{r.poster_path}}" alt="" width="150px" height="200px" />
+    <div ng-repeat="r in movies.recent" class="col s12 l4 m4 center-align">
+      <span class="header-font">{{r.title}}</span>
+      <img ui-sref="dashboard({id: r.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{r.poster_path}}" class="responsive-img z-depth-3 materialboxed"/>
     </div>
    </div>
  </div>
+ <!-- Recent Movies -->
 
- <ul ng-show="movies.searches">
+<!-- Search Results-->
+  <div class="collection" ng-show="movies.searches">
+      <h2 class="header-font center-align" ng-show="movies.searches">Search Results</h2>
+       <a href="#!" id="search-results" class="collection-item" ng-repeat="result in movies.searchResults" ui-sref="dashboard({id: result.id})"><span ng-click="movies.searches = false" ui-sref="dashboard({id: result.id})">{{result.title}}</a>
+    </div>
+ <!-- <ul ng-show="movies.searches">
    <li ng-repeat="result in movies.searchResults"><span ng-click="movies.searches = false" ui-sref="dashboard({id: result.id})" >{{result.title}}</span></li>
- </ul>
+ </ul> -->
+ <!-- Search Results -->

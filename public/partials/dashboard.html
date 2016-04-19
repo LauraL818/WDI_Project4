@@ -10,7 +10,7 @@
 
   <div class="row">
     <div class="col s12 l4">
-      <div class="card center-align" style="background-color:#AB4A4A" >
+      <div id="card" class="card center-align" style="background-color:#AB4A4A" >
         <div class="card-content white-text">
           <span class="card-title">Film Details</span>
           <p> Studio: <br> {{info.company}} </p>
@@ -45,18 +45,20 @@
 <!--Buttons to toggle between graphs and overview-->
   <div class="row">
     <div class="col s12 center-align">
-      <a class="waves-effect btn" ng-click="info.overview = true; info.main = true" ng-hide="info.overview" style="background-color:#632B2B">Overview</a>
-      <a class="waves-effect btn" ng-click="info.main = false; info.overview = false" ng-show="info.main" style="background-color:#632B2B">Main</a>
+      <a class="waves-effect btn overview-buttons" ng-click="info.overview = true; info.main = true" ng-hide="info.overview" style="background-color:#632B2B">Overview</a>
+      <a class="waves-effect btn overview-buttons" ng-click="info.main = false; info.overview = false" ng-show="info.main" style="background-color:#632B2B">Main</a>
       </div><!-- End Col-->
   </div><!-- End Row-->
 
   <div class="row center-align">
-    <a id="add" class="waves-effect btn" ng-click="info.addMovie()" ng-if="global.isAuthed()" style="background-color:#632B2B">Add Movie</a>
+    <a id="add" class="waves-effect btn overview-buttons" ng-click="info.addMovie()" ng-if="global.isAuthed()" style="background-color:#632B2B">Add Movie</a>
   </div>
 
   <!-- Movie Overview -->
   <div class="row" ng-show="info.overview">
-    {{info.movie.overview}}
+    <div class="center-align">
+      {{info.movie.overview}}
+    </div>
   </div>
   <!-- End Movie Overview -->
 
@@ -84,7 +86,7 @@
   <div class="row">
     <h5 class="center-align header-font">Similar Titles</h5>
     <div class= "col l3 m6 s12 similar"  ng-repeat="similar in info.similarFilms" >
-      <img class="z-depth-3 materialboxed"  ui-sref="dashboard({id: similar.id})" height="100%" width="100%" ng-src="http://image.tmdb.org/t/p/w500{{similar.poster_path}}">
+      <img id="similar-movies" class="z-depth-3 materialboxed"  ui-sref="dashboard({id: similar.id})" height="100%" width="100%" ng-src="http://image.tmdb.org/t/p/w500{{similar.poster_path}}">
     </div>
   </div>
 <!-- End Similar Titles -->

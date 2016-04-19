@@ -1,6 +1,18 @@
 #poster {
   height: 100%;
-  width: 90%;
+  width: 100%;
+}
+
+#card {
+  padding-bottom:106px;
+}
+
+#similar-movies{
+  padding:5px;
+}
+
+.overview-buttons:hover{
+  opacity: 0.5;
 }
 
 canvas {

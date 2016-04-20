@@ -72,47 +72,48 @@
         })
       }
 
-      vm.getBarChart = function(){
+      vm.getChart = function(){
         vm.analyze = true
         vm.getUserMovies()
-        vm.data = {
-          labels: vm.titles,
-          datasets: [
-            {
-              label: 'Revenue',
-              fillColor: 'rgba(255,255,255,0.7)',
-              strokeColor: 'rgba(54,23,23,0.8)',
-              highlightFill: 'rgba(99,43,43,0.75)',
-              highlightStroke: 'rgba(54,23,23,1)',
-              data: vm.revenues
-            },
-            {
-              label: 'Budget',
-              fillColor: 'rgba(99,43,43,0.7)',
-              strokeColor: 'rgba(54,23,23,0.8)',
-              highlightFill: 'rgba(255,255,255,0.75)',
-              highlightStroke: 'rgba(54,23,23,1)',
-              data: vm.budgets
-            }
-          ]
-        }
-
-        vm.options =  {
-          responsive: true,
-          scaleBeginAtZero : true,
-          scaleShowGridLines : true,
-          scaleGridLineColor : "rgba(0,0,0,.05)",
-          scaleGridLineWidth : 1,
-          barShowStroke : true,
-          barStrokeWidth : 2,
-          barValueSpacing : 5,
-          barDatasetSpacing : 1
-        }
-
-        var ctx1 = document.querySelector("#chartjs").getContext("2d")
-        var myBarChart1 = new Chart(ctx1).Bar(vm.data, vm.options)
-
+        // vm.data = {
+        //   labels: vm.titles,
+        //   datasets: [
+        //     {
+        //       label: 'Revenue',
+        //       fillColor: 'rgba(255,255,255,0.7)',
+        //       strokeColor: 'rgba(54,23,23,0.8)',
+        //       highlightFill: 'rgba(99,43,43,0.75)',
+        //       highlightStroke: 'rgba(54,23,23,1)',
+        //       data: vm.revenues
+        //     },
+        //     {
+        //       label: 'Budget',
+        //       fillColor: 'rgba(99,43,43,0.7)',
+        //       strokeColor: 'rgba(54,23,23,0.8)',
+        //       highlightFill: 'rgba(255,255,255,0.75)',
+        //       highlightStroke: 'rgba(54,23,23,1)',
+        //       data: vm.budgets
+        //     }
+        //   ]
+        // }
+        //
+        // vm.options =  {
+        //   responsive: true,
+        //   scaleBeginAtZero : true,
+        //   scaleShowGridLines : true,
+        //   scaleGridLineColor : "rgba(0,0,0,.05)",
+        //   scaleGridLineWidth : 1,
+        //   barShowStroke : true,
+        //   barStrokeWidth : 2,
+        //   barValueSpacing : 5,
+        //   barDatasetSpacing : 1
+        // }
+        //
+        // var ctx1 = document.querySelector("#chartjs").getContext("2d")
+        // var myBarChart1 = new Chart(ctx1).Bar(vm.data, vm.options)
+        //
       }
+
     }
 
     function profileChart(){
@@ -125,173 +126,184 @@
             title:'@'
           },
           link: function(scope,el){
-            /////////// START CONVERTING STRING DATA INTO INTEGERS////////////
-              var rev = scope.revenue.replace(/((\[)|(\]))/g,"").split(",")
-              var revenue = []
-              for(var i=0; i < rev.length; i++){
-                revenue.push(parseInt(rev[i])/10)
+            scope.$watch('title', function(newValue, oldValue){
+              if(newValue != oldValue){
+                d3.select("#scatter svg").remove()
               }
 
-              var bud = scope.budget.replace(/((\[)|(\]))/g,"").split(",")
-              var budget = []
-              for(var i=0; i < bud.length; i++){
-                budget.push(parseInt(bud[i])/10)
-              }
+                /////////// START CONVERTING STRING DATA INTO INTEGERS////////////
+                  var rev = scope.revenue.replace(/((\[)|(\]))/g,"").split(",")
+                  var revenue = []
+                  for(var i=0; i < rev.length; i++){
+                    revenue.push(parseInt(rev[i])/10)
+                  }
 
-              var rat = scope.rating.replace(/((\[)|(\]))/g,"").split(",")
-              var rating = []
-              for(var i=0; i < rat.length; i++){
-                rating.push(parseInt(rat[i]))
-              }
+                  var bud = scope.budget.replace(/((\[)|(\]))/g,"").split(",")
+                  var budget = []
+                  for(var i=0; i < bud.length; i++){
+                    budget.push(parseInt(bud[i])/10)
+                  }
 
-              var t = scope.title.replace(/((\[)|(\]))/g,"").split(",")
-              var title = []
-              for(var i=0; i < rat.length; i++){
-                title.push(t[i].replace(/["']/g, ""))
-              }
+                  var rat = scope.rating.replace(/((\[)|(\]))/g,"").split(",")
+                  var rating = []
+                  for(var i=0; i < rat.length; i++){
+                    rating.push(parseInt(rat[i]))
+                  }
 
-              ///////////////////////// END CONVERTING DATA ////////////////////
+                  var t = scope.title.replace(/((\[)|(\]))/g,"").split(",")
+                  var title = []
+                  for(var i=0; i < rat.length; i++){
+                    title.push(t[i].replace(/["']/g, ""))
+                  }
 
-              ///////////////////////// DATA FOR SCATTER PLOT //////////////////
-              var dataset = []
-              for(var i = 0; i < rating.length; i ++){
-                var arr = []
-                arr.push(rating[i])
-                arr.push(budget[i])
-                arr.push(revenue[i])
-                arr.push(title[i])
-                dataset.push(arr)
-              }
+                  ///////////////////////// END CONVERTING DATA ////////////////////
 
-              ///////////////////////// END SCATTER PLOT //////////////////////
+                  ///////////////////////// DATA FOR SCATTER PLOT //////////////////
+                  var dataset = []
+                  for(var i = 0; i < rating.length; i ++){
+                    var arr = []
+                    arr.push(rating[i])
+                    arr.push(budget[i])
+                    arr.push(revenue[i])
+                    arr.push(title[i])
+                    dataset.push(arr)
+                  }
+                  ///////////////////////// END SCATTER PLOT //////////////////////
 
-              //////////////////////// START D3 SCATTER PLOT /////////////////////
-              var w = 1200
-              var h = 450
+                  //////////////////////// START D3 SCATTER PLOT /////////////////////
+                  var margin = {top: 20, right: 20, bottom: 30, left: 60}
+                  // var ww = document.body.clientWidth
+                  // var w = ww - margin.left - margin.right
+                  // var h = 500 - margin.top - margin.bottom
+                  var w = 1200
+                  var h = 500
+                  var padding = 60
 
-              var padding = 60
+                    var svg = d3.select("#scatter")
+                                .append("svg")
+                                .attr("width", w)
+                                .attr("height", h)
 
-                var svg = d3.select("#scatter")
-                            .append("svg")
-                            .attr("width", w)
-                            .attr("height", h)
+                    var tooltip = d3.select("svg")
+                                .append("text")
+                                .attr("class", "tooltip")
+                                .style("opacity", 0)
+                                .style("text-anchor","end")
+                                .attr("startOffset","100%")
+                                .attr("fill", "black")
 
-                var tooltip = d3.select("svg")
-                            .append("text")
-                            .attr("class", "tooltip")
-                            .style("opacity", 0)
-                            .style("text-anchor","end")
-                            .attr("startOffset","100%")
-                            .attr("fill", "black")
+                    var rScale = d3.scale.linear()
+                                 .domain([0, d3.max(dataset, function(d) { return d[0] })])
+                                 .range([2, 20]);
 
-                var rScale = d3.scale.linear()
-                             .domain([0, d3.max(dataset, function(d) { return d[0] })])
-                             .range([2, 20]);
+                    var xScale = d3.scale.linear()
+                                  .domain([0, d3.max(dataset, function(d){ return d[1] }) + 10])
+                                  .range([padding, w - padding * 2])
 
-                var xScale = d3.scale.linear()
-                              .domain([0, d3.max(dataset, function(d){ return d[1] }) + 10])
-                              .range([padding, w - padding * 2])
+                    var yScale = d3.scale.linear()
+                                  .domain([0, d3.max(dataset, function(d){ return d[2] })])
+                                  .range([h - padding, padding])
 
-                var yScale = d3.scale.linear()
-                              .domain([0, d3.max(dataset, function(d){ return d[2] })])
-                              .range([h - padding, padding])
+                    var xAxis = d3.svg.axis()
+                        .scale(xScale)
+                        .orient("bottom")
+                        .ticks(8)
 
-                var xAxis = d3.svg.axis()
-                    .scale(xScale)
-                    .orient("bottom")
-                    .ticks(8)
-
-                var yAxis = d3.svg.axis()
-                    .scale(yScale)
-                    .orient("left")
-                    .ticks(8)
+                    var yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left")
+                        .ticks(8)
 
 
-                var circles = svg.selectAll("circle")
-                  .data(dataset)
-                  .enter()
-                  .append("circle")
-                  .attr("cx", function(d){
-                    return xScale(d[1])
-                  })
-                  .attr("cy", function(d){
-                    return yScale(d[2])
-                  })
-                  .attr("r", function(d){
-                    return rScale(d[0])
-                  })
-                  .attr("fill", "#E8A8A8")
-                  .style("opacity", 1)
-                  .style('stroke', '#632B2B')
-                  .style('stroke-width', '3')
+                    var circles = svg.selectAll("circle")
+                      .data(dataset)
+                      .enter()
+                      .append("circle")
+                      .attr("cx", function(d){
+                        return xScale(d[1])
+                      })
+                      .attr("cy", function(d){
+                        return yScale(d[2])
+                      })
+                      .attr("r", function(d){
+                        return rScale(d[0])
+                      })
+                      .attr("fill", "#E8A8A8")
+                      .style("opacity", 1)
+                      .style('stroke', '#632B2B')
+                      .style('stroke-width', '3')
 
-                circles.on("mouseover", function(d) {
-                        circles.style("opacity", .1)
-                        tooltip.transition()
-                            .duration(200)
-                            .style("opacity", 1);
-                        tooltip.text(d[3])
-                            .attr("x", xScale(d[1]))
-                            .attr("y", yScale(d[2]))
+                    circles.on("mouseover", function(d) {
+                            circles.style("opacity", .1)
+                            tooltip.transition()
+                                .duration(200)
+                                .style("opacity", 1);
+                            tooltip.text(d[3])
+                                .attr("x", xScale(d[1]))
+                                .attr("y", yScale(d[2]))
 
-                    })
-                  .on("mouseout", function(d) {
-                       circles.style("opacity", 1)
-                       tooltip.transition()
-                           .duration(200)
-                           .style("opacity", 0);
-                   })
+                        })
+                      .on("mouseout", function(d) {
+                           circles.style("opacity", 1)
+                           tooltip.transition()
+                               .duration(200)
+                               .style("opacity", 0);
+                       })
 
-                    svg.append("text")
-                        .attr("class", "x label")
-                        .attr("text-anchor", "end")
-                        .attr("x", w/2)
-                        .attr("y", h - 6)
-                        .text("Budget")
+                        svg.append("text")
+                            .attr("class", "x label")
+                            .attr("text-anchor", "end")
+                            .attr("x", w/2)
+                            .attr("y", h - 6)
+                            .text("Budget")
 
-                    svg.append("text")
-                       .attr("transform", "rotate(-90)")
-                       .attr("y", 0)
-                       .attr("x",0 - (h / 2))
-                       .attr("dy", "1em")
-                       .style("text-anchor", "middle")
-                       .text("Revenue");
+                        svg.append("text")
+                           .attr("transform", "rotate(-90)")
+                           .attr("y", 0)
+                           .attr("x",0 - (h / 2))
+                           .attr("dy", "1em")
+                           .style("text-anchor", "middle")
+                           .text("Revenue");
 
-                     svg.append("g")
-                       .attr("class", "axis")
-                       .attr("transform", "translate(0," + (h - padding) + ")")
-                       .call(xAxis)
+                         svg.append("g")
+                           .attr("class", "axis")
+                           .attr("transform", "translate(0," + (h - padding) + ")")
+                           .call(xAxis)
 
-                     svg.append("g")
-                         .attr("class", "axis")
-                         .attr("transform", "translate(" + padding + ",0)")
-                         .call(yAxis)
+                         svg.append("g")
+                             .attr("class", "axis")
+                             .attr("transform", "translate(" + padding + ",0)")
+                             .call(yAxis)
 
-              //////////////////////// START D3 BAR CHART /////////////////////
-                      var svg = d3.select("#profile")
-                                    .append("svg")
-                                    .attr("width", 900)
-                                    .attr("height", 900)
+                  //////////////////////// START D3 BAR CHART /////////////////////
+                          var svg = d3.select("#profile")
+                                        .append("svg")
+                                        .attr("width", 900)
+                                        .attr("height", 900)
 
-                      var group = svg.selectAll("g")
-                          .data(rating)
-                          .enter()
-                          .append("g")
+                          var group = svg.selectAll("g")
+                              .data(rating)
+                              .enter()
+                              .append("g")
 
-                          group.append("rect")
-                            .attr("width", "20px")
-                            .attr("fill", "green")
-                            .attr("height", function(d) {
-                              return d + "px";
-                            })
-                            .attr("x", function(d, i) {
-                              return i * 60;
-                            })
-              // ///////////////////////// END D3 BAR CHART //////////////////
-            }
-      }
+                              group.append("rect")
+                                .attr("width", "20px")
+                                .attr("fill", "green")
+                                .attr("height", function(d) {
+                                  return d + "px";
+                                })
+                                .attr("x", function(d, i) {
+                                  return i * 60;
+                                })
+
+                  // ///////////////////////// END D3 BAR CHART //////////////////
+
+            }) // End $watch
+
+          } // End link
+      } // End directive
       return directive
-    }
+    } // End function
 
 
 

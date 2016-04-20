@@ -13,27 +13,28 @@
      </div>
 
     <div class="row center-align">
-      <a class="waves-effect btn" style="background-color:#AB4A4A" ng-click="user.getBarChart()" ng-show="!user.analyze">Compare Films</a>
-      <a class="waves-effect btn" style="background-color:#AB4A4A" ng-click="user.analyze = false" ng-show="user.analyze">Back</a>
+      <a class="waves-effect btn" style="background-color:#AB4A4A" ng-click="user.getChart()" ng-show="!user.analyze">Compare Films</a>
+      <a class="waves-effect btn" style="background-color:#AB4A4A" ng-click=" user.analyze = false" ng-show="user.analyze">Back</a>
     </div>
  <!-- MOVIE INFO -->
 
  <!-- D3 CHART -->
- <div ng-show="user.analyze">
-   <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></profile-chart>
+ <div class="row" ng-show="user.analyze">
+   <div class="col s12 m12 l12">
+        <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></profile-chart>
+   </div>
  </div>
   <!-- D3 CHART -->
 
   <!-- BAR CHART -->
-  <!-- <a class="waves-effect btn" ng-click="user.getBarChart()" style="background-color:#AB4A4A">Get Bar Chart</a> -->
-  <div class="row">
+  <!-- <div class="row">
     <canvas id="chartjs" tc-chartjs-bar chart-options="user.options" chart-data="user.data"></canvas>
-  </div>
+  </div> -->
   <!-- BAR CHART -->
 
 <!-- USER EDIT -->
 <div class="row center-align">
-    <a  class="waves-effect btn" ng-click="user.display()"  ng-show="!user.active" style="background-color:#632B2B">Account Information</a>
+    <a  class="waves-effect btn" ng-click="user.display()"  ng-show="!user.active" ng-hide="user.analyze" style="background-color:#632B2B">Account Information</a>
     <div ng-show="!user.editing" ng-hide="!user.active" class="profile-info center-align">
       <h2 class="center-align">Account Information</h2>
       <h5 class="center-align"> Email: {{user.user.email}}</h5>

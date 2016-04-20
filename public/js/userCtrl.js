@@ -135,13 +135,13 @@
                   var rev = scope.revenue.replace(/((\[)|(\]))/g,"").split(",")
                   var revenue = []
                   for(var i=0; i < rev.length; i++){
-                    revenue.push(parseInt(rev[i])/10)
+                    revenue.push(parseInt(rev[i]))
                   }
 
                   var bud = scope.budget.replace(/((\[)|(\]))/g,"").split(",")
                   var budget = []
                   for(var i=0; i < bud.length; i++){
-                    budget.push(parseInt(bud[i])/10)
+                    budget.push(parseInt(bud[i]))
                   }
 
                   var rat = scope.rating.replace(/((\[)|(\]))/g,"").split(",")

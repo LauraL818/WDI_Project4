@@ -4,4 +4,35 @@
 
 #now-playing {
 margin: 2px;
+height: 481px;
+}
+
+@media(max-width: 1200px) {
+    #now-playing {
+        height: 350px;
+    }
+}
+
+@media(max-width: 990px) {
+    #now-playing {
+        height: 575px;
+    }
+}
+
+@media(max-width: 750px) {
+    #now-playing {
+        height: 450px;
+    }
+}
+
+@media(max-width: 600px) {
+    #now-playing {
+        height: 700px;
+    }
+}
+
+@media(max-width: 410px) {
+    #now-playing {
+        height: 540px;
+    }
 }

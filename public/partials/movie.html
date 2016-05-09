@@ -21,7 +21,7 @@
 <!-- Recent Movies -->
 <div class="container" ng-hide="movies.searches">
   <div class="row">
-    <div ng-repeat="r in movies.recent" class="col s12 l4 m4 center-align">
+    <div ng-repeat="r in movies.recent" class="col s12 m6 l4 center-align">
       <span class="header-font">{{r.title}}</span>
       <img id="now-playing" ui-sref="dashboard({id: r.id})" ng-click="movies.getOne()" ng-src="http://image.tmdb.org/t/p/w500{{r.poster_path}}" class="responsive-img z-depth-3 materialboxed"/>
     </div>

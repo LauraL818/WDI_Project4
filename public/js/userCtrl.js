@@ -125,6 +125,7 @@
             scope.$watch('title', function(newValue, oldValue){
               if(newValue != oldValue){
                 d3.select("#scatter svg").remove()
+                d3.select("#bar svg").remove()
               }
 
                 /////////// START CONVERTING STRING DATA INTO INTEGERS////////////
@@ -271,27 +272,34 @@
                              .call(yAxis)
 
                   //////////////////////// START D3 BAR CHART /////////////////////
-                          // var barPadding = 1
-                          //
-                          // var svg = d3.select("#bar")
-                          //               .append("svg")
-                          //               .attr("width", w)
-                          //               .attr("height", h)
-                          //
-                          // var group = svg.selectAll("g")
-                          //     .data(dataset)
-                          //     .enter()
-                          //     .append("g")
-                          //
-                          //     group.append("rect")
-                          //       .attr("width", "20px")
-                          //       .attr("fill", "green")
-                          //       .attr("height", function(d) {
-                          //         return d[2] + "px";
-                          //       })
-                          //       .attr("x", function(d, i) {
-                          //         return i * 30;
-                          //       })
+                          var barPadding = 1
+                          var height = 450
+                          var width = 600
+
+                          var svg = d3.select("#bar")
+                                        .append("svg")
+                                        .attr("width", width)
+                                        .attr("height", height)
+
+                          var group = svg.selectAll("g")
+                              .data(dataset)
+                              .enter()
+                              .append("g")
+
+                              group.append("rect")
+                                .attr("height", function(d) {
+                                  return d[2]/2 + "px";
+                                })
+                                .attr("width", (width) / dataset.length - barPadding)
+                                .attr("x", function(d, i) {
+                                      return i * (width / dataset.length);
+                                  })
+                                .attr("y", function(d) {
+                                    return height - d[2]/2;
+                                })
+                                .attr("fill", "#913F33")
+
+
 
                   // ///////////////////////// END D3 BAR CHART //////////////////
 

@@ -24,6 +24,11 @@
         <profile-chart id="scatter" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></profile-chart>
    </div>
  </div>
+ <div class="row" ng-show="user.analyze">
+   <div class="col s12 m12 l12">
+        <bar-chart id="bar" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></bar-chart>
+   </div>
+ </div>
   <!-- D3 CHART -->
 
   <!-- BAR CHART -->

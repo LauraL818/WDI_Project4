@@ -14,8 +14,6 @@
           vm.userMovies= null
           vm.revenues = []
           vm.budgets = []
-          // vm.revAdj = []
-          // vm.revBud = []
           vm.ratings = []
           vm.titles = []
           vm.userMovies = results.movies
@@ -24,8 +22,6 @@
           for(var i = 0; i<vm.userMovies.length; i++){
             vm.revenues.push(vm.userMovies[i].revenue)
             vm.budgets.push(vm.userMovies[i].budget)
-            // vm.revAdj.push(vm.userMovies[i].revenue)
-            // vm.revBud.push(vm.userMovies[i].budget)
             vm.ratings.push(vm.userMovies[i].rating)
             vm.titles.push(vm.userMovies[i].title)
           }
@@ -171,7 +167,7 @@
                   ///////////////////////// END SCATTER PLOT //////////////////////
 
                   //////////////////////// START D3 SCATTER PLOT /////////////////////
-                  var margin = {top: 20, right: 20, bottom: 30, left: 60}
+                  // var margin = {top: 20, right: 20, bottom: 30, left: 60}
                   // var ww = document.body.clientWidth
                   // var w = ww - margin.left - margin.right
                   // var h = 500 - margin.top - margin.bottom
@@ -188,7 +184,7 @@
                                 .append("text")
                                 .attr("class", "tooltip")
                                 .style("opacity", 0)
-                                .style("text-anchor","end")
+                                .style("text-anchor","middle")
                                 .attr("startOffset","100%")
                                 .attr("fill", "black")
 
@@ -230,11 +226,10 @@
                       })
                       .attr("fill", "#E8A8A8")
                       .style("opacity", 1)
-                      .style('stroke', '#632B2B')
-                      .style('stroke-width', '3')
 
-                    circles.on("mouseover", function(d) {
-                            circles.style("opacity", .1)
+
+                    circles.on("click", function(d) {
+                            circles.style("opacity", .3)
                             tooltip.transition()
                                 .duration(200)
                                 .style("opacity", 1);
@@ -246,13 +241,13 @@
                       .on("mouseout", function(d) {
                            circles.style("opacity", 1)
                            tooltip.transition()
-                               .duration(200)
+                               .duration(150)
                                .style("opacity", 0);
                        })
 
                         svg.append("text")
                             .attr("class", "x label")
-                            .attr("text-anchor", "end")
+                            .attr("text-anchor", "start")
                             .attr("x", w/2)
                             .attr("y", h - 6)
                             .text("Budget")
@@ -262,7 +257,7 @@
                            .attr("y", 0)
                            .attr("x",0 - (h / 2))
                            .attr("dy", "1em")
-                           .style("text-anchor", "middle")
+                           .style("text-anchor", "end")
                            .text("Revenue");
 
                          svg.append("g")
@@ -276,25 +271,27 @@
                              .call(yAxis)
 
                   //////////////////////// START D3 BAR CHART /////////////////////
-                          var svg = d3.select("#profile")
-                                        .append("svg")
-                                        .attr("width", 900)
-                                        .attr("height", 900)
-
-                          var group = svg.selectAll("g")
-                              .data(rating)
-                              .enter()
-                              .append("g")
-
-                              group.append("rect")
-                                .attr("width", "20px")
-                                .attr("fill", "green")
-                                .attr("height", function(d) {
-                                  return d + "px";
-                                })
-                                .attr("x", function(d, i) {
-                                  return i * 60;
-                                })
+                          // var barPadding = 1
+                          //
+                          // var svg = d3.select("#bar")
+                          //               .append("svg")
+                          //               .attr("width", w)
+                          //               .attr("height", h)
+                          //
+                          // var group = svg.selectAll("g")
+                          //     .data(dataset)
+                          //     .enter()
+                          //     .append("g")
+                          //
+                          //     group.append("rect")
+                          //       .attr("width", "20px")
+                          //       .attr("fill", "green")
+                          //       .attr("height", function(d) {
+                          //         return d[2] + "px";
+                          //       })
+                          //       .attr("x", function(d, i) {
+                          //         return i * 30;
+                          //       })
 
                   // ///////////////////////// END D3 BAR CHART //////////////////
 

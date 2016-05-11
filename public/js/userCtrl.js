@@ -272,32 +272,72 @@
                              .call(yAxis)
 
                   //////////////////////// START D3 BAR CHART /////////////////////
-                          var barPadding = 1
-                          var height = 450
-                          var width = 600
-
                           var svg = d3.select("#bar")
                                         .append("svg")
                                         .attr("width", width)
                                         .attr("height", height)
 
-                          var group = svg.selectAll("g")
-                              .data(dataset)
-                              .enter()
-                              .append("g")
+                          var data = dataset
 
-                              group.append("rect")
-                                .attr("height", function(d) {
-                                  return d[2]/2 + "px";
-                                })
-                                .attr("width", (width) / dataset.length - barPadding)
-                                .attr("x", function(d, i) {
-                                      return i * (width / dataset.length);
-                                  })
-                                .attr("y", function(d) {
-                                    return height - d[2]/2;
-                                })
+                          var margin = {top: 30, right: 30, bottom: 150, left: 120},
+                              width = 600 - margin.left - margin.right,
+                              height = 550 - margin.top - margin.bottom;
+
+                          var x = d3.scale.ordinal()
+                              .domain(data.map(function(d) { return d[3]; }))
+                              .rangeRoundBands([0, width], .1);
+
+                          var y = d3.scale.linear()
+                              .domain([0, d3.max(data, function(d) { return d[2]; })])
+                              .range([height, 0]);
+
+                          var xAxis = d3.svg.axis()
+                              .scale(x)
+                              .orient("bottom");
+
+                          var yAxis = d3.svg.axis()
+                              .scale(y)
+                              .orient("left");
+
+                          var chart = svg.attr("width", width + margin.left + margin.right)
+                              .attr("height", height + margin.top + margin.bottom)
+                              .append("g")
+                              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                          chart.selectAll(".bars")
+                                .data(data)
+                                .enter()
+                                .append("rect")
+                                .attr("class", "bar")
+                                .attr("x", function(d) { return x(d[3]); })
+                                .attr("y", function(d) { return y(d[2]); })
+                                .attr("height", function(d) { return height - y(d[2]); })
+                                .attr("width", x.rangeBand())
                                 .attr("fill", "#913F33")
+
+                          chart.append("g")
+                              .attr("class", "y axis")
+                              .call(yAxis)
+
+                          // x axis and label
+                          chart.append("g")
+                              .attr("class", "x axis")
+                              .attr("transform", "translate(0," + height + ")")
+                              .call(xAxis)
+                              .selectAll("text")
+                              .style("text-anchor", "end")
+                               .attr("dx", "-.8em")
+                               .attr("dy", ".15em")
+                               .attr("transform", "rotate(-40)" )
+
+                          // chart title
+                          chart.append("text")
+                           .attr("x", (width / 2))
+                           .attr("y", 0 - (margin.top / 2))
+                           .attr("text-anchor", "middle")
+                           .style("font-size", "16px")
+                           .style("text-decoration", "underline")
+                           .text("Revenue Breakdown");
 
 
 

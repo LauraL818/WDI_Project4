@@ -25,8 +25,13 @@
    </div>
  </div>
  <div class="row" ng-show="user.analyze">
-   <div class="col s12 m12 l12">
+   <div class="col s12 m6 l6">
         <bar-chart id="bar" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></bar-chart>
+   </div>
+  <div class="row" ng-show="user.analyze">
+     <div class="col s12 m6 l6">
+          <bar2-chart id="bar2" budget={{user.budgets}} revenue={{user.revenues}} rating={{user.ratings}} title={{user.titles}} ng-if="user.budgets"></bar2-chart>
+     </div>
    </div>
  </div>
   <!-- D3 CHART -->
